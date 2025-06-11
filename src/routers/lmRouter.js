@@ -5,4 +5,5 @@ let router=routers.Router();
 router.get("/",controller.homepage);
 router.get("/login",controller.loginpage);
 
+router.get("/login",controller.adminLogin);
 module.exports=router;
