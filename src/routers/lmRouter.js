@@ -4,4 +4,5 @@ let router=routers.Router();
 
 router.get("/",controller.homepage);
 router.get("/login",controller.adminLogin);
+//router.get("/admindash",controller.admindash);
 module.exports=router;  

@@ -4,3 +4,6 @@ exports.homepage=(req,res)=>{
 exports.adminLogin=(req,res)=>{
         res.render("loginpage.ejs");
 }
+exports.admindash=(req,res)=>{
+        res.render("admindashboard.ejs");
+}
