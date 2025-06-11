@@ -1,6 +1,7 @@
 let express=require("express");
 let bodyparser=require("body-parser");
 let router=require("../src/routers/lmRouter.js");
+let conn=require("../db.js");
 let app=express();
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
