@@ -16,7 +16,4 @@ conn.connect((err)=>{
     }
 });
 module.exports=conn;
-<<<<<<< HEAD
 
-=======
->>>>>>> 878b701f910d1a8ca11cc12ea1b26c557323fe79
