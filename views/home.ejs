@@ -31,7 +31,10 @@
       height: 60px;
       border-radius: 35px;
       margin-top:4px;
-      border: solid;
+}
+.nav h2{
+    margin-left: -580px;
+    font-size :25px;;
 }
 .nav ul a{
     text-decoration: none;
@@ -43,7 +46,7 @@
     color:rgb(245, 7, 7);
 }
 .login{
-    margin:100px 600px;
+    margin:170px 600px;
     width:150px;
     border: solid 1px black;
     background-color: rgb(242, 202, 107);
@@ -65,9 +68,9 @@
     font-size: 20px;
 }
 .headline{
-    padding:1px;
-    margin:10px 40px ;
-    background-color: rgba(255, 255, 255,0.2);
+
+    margin:10px 250px ;
+    background-color: rgba(255, 255, 255,0.1);
     border-radius:20px;
     text-align: center;
     font-size: 30px;
@@ -78,13 +81,20 @@
 .headline label{
     font-size: 100px;
 }
+.read{
+    color:red;
+}
+.space{
+color:darkturquoise;
+}
+
 </style>
 </head>
 <body class="home">
   
         <div class="nav">
-           <div> <img src="logo2.png" alt="no-image">
-            <label>ReadSpace</label></div>
+            <img src="logo2.png" alt="no-image">
+            <h2>ReadSpace</h2>
             
             <ul>
                 <li><a href="">Home</a></li>
@@ -93,8 +103,7 @@
                 <li><a href="/login">Login</a></li>
             </ul>
         </div>
-        <div class="headline"><h1>Library Management System <label for="">📖</label></h1>
-           
+        <div class="headline"><h1>Welcome To <label for=""class="read">Read</label><label for=""class="space">Space</label> <label for="">📖</label></h1>
         </div>
         <div class="login">
             <a href="/login">Let's Go!</a>
