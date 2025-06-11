@@ -1,1 +1,2 @@
-let conn=require("mysql2");
+let mysql=require("mysql2");
+
