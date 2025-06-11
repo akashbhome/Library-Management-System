@@ -16,20 +16,21 @@
 .nav{
     display:flex;
     justify-content: space-between;
-    padding: 13px 250px;
-    background-color: rgba(250,250,250,0.5);
+    padding: 13px 250px 13px 70px;
+    background-color: rgba(255, 255, 255,0.7);
+
 }
 .nav ul{
     display:flex;
     gap:45px;
-    padding: 10px;
+    padding: 5px;
     list-style-type:none;
 }
 .nav img{
-      width:100px;
-      height: 100px;
-      border-radius: 50px;
-      margin-top: 10px;
+      width:60px;
+      height: 60px;
+      border-radius: 35px;
+      margin-top:4px;
 }
 .nav ul a{
     text-decoration: none;
@@ -41,13 +42,13 @@
     color:rgb(245, 7, 7);
 }
 .login{
-    margin-top: 25px;
-    width:100px;
+    margin:180px 600px;
+    width:150px;
     border: solid 1px black;
     background-color: rgb(105, 177, 241);
     text-align: center;
     height:25px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 25px 0 25px 25px;
     box-shadow:5px 5px 6px;
 }
@@ -58,7 +59,15 @@
     color:black;
     text-decoration: none;
     font-weight: bold;
-
+    font-size: 20px;
+}
+.headline{
+    width:500px;
+    padding:2px;
+    margin:60px 450px ;
+    background-color: rgba(255, 255, 255,0.2);
+    border-radius:20px;
+    text-align: center;
 }
 </style>
 </head>
@@ -68,14 +77,15 @@
             <img src="logo2.png" alt="no-image">
             
             <ul>
+                <li><a href="">Home</a></li>
                 <li><a href="">About us</a></li>
-                <li><a href="">Service</a></li>
                 <li><a href="">View Books</a></li>
-                <li><a href="">Login</a></li>
+                <li><a href="/login">Login</a></li>
             </ul>
         </div>
+        <div class="headline"><h1>Library Management System 📖</h1></div>
         <div class="login">
-            <a href="/login">Login</a>
+            <a href="/login">Let's Go!</a>
             </div>
 </body>
 </html>
