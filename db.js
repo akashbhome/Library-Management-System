@@ -1,7 +1,5 @@
 let mysql=require("mysql2");
 
-<<<<<<< HEAD
-=======
 let conn=mysql.createConnection({
     host:"localhost",
     user:"root",
@@ -18,4 +16,3 @@ conn.connect((err)=>{
     }
 });
 module.exports=conn;
->>>>>>> 7d92cc7e1cb7d2b895f727a58f1d355bdae5cfaa
