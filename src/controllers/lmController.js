@@ -19,3 +19,7 @@ exports.admindash=(req,res)=>{
 exports.about=(req,res)=>{
         res.render("about.ejs");
 }
+
+exports.addstud=(req,res)=>{
+        
+}
