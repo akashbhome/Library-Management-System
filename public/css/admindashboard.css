@@ -5,8 +5,10 @@ body{
 .main{
     height: 100%;
     border: solid;
+    display: flex;
 
 }
 .main .side{
+    width:25%;
     height: 100%;
 }

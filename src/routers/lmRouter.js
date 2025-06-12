@@ -5,8 +5,8 @@ let router=routers.Router();
 router.get("/",controller.homepage);
 router.get("/login",controller.adminLogin);
 router.post("/adminLog",controller.admindash);
-router.get("/addstud",controller.addstud);
-router.get("/viewstud",controller.viewstud);
-
+router.get("/addReg",controller.addReg);
 router.get("/about",controller.about);
+router.post("/stduser",controller.stdAdd);
+router.get("/update",controller.stdUpdate);
 module.exports=router;  

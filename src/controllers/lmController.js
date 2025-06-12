@@ -1,5 +1,5 @@
 let service=require("../services/lmService");
-
+let adminModel=require("../models/lmModel.js");
 exports.homepage=(req,res)=>{
         res.render("home.ejs");
 }
@@ -21,18 +21,26 @@ exports.about=(req,res)=>{
         res.render("about.ejs");
 }
 
-exports.addstud=(req,res)=>{
-         res.render("addstud.ejs");
+exports.addReg=(req,res)=>{
+        res.render("addstud.ejs",{msg:""});
 }
-// exports.viewstud=(req,res)=>{
-//         res.render("viewstud.ejs");
-// }
+// 
+exports.stdAdd = (req, res) => {
+    let { name, email, password, role } = req.body;
 
-exports.viewstud=async (req,res)=>{
-   
-    let result=
-    catch(err){
-        console.log(err);
-        res.render("error");
-    }
+    adminModel.addStd(name, email, password, role)
+        .then((result) => {
+            if (result) {
+                res.render("addstud.ejs", { msg: "Success" });
+            } else {
+                res.render("addstud.ejs", { msg: "Fail" });
+            }
+        })
+        .catch((err) => {
+            console.error("Error:", err);
+            res.render("addstud.ejs", { msg: "Error occurred" });
+        });
+};
+exports.stdUpdate=(req,res)=>{
+res.render("stdupdate.ejs");
 }
