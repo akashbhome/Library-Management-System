@@ -6,7 +6,7 @@ router.get("/",controller.homepage);
 router.get("/login",controller.adminLogin);
 router.post("/adminLog",controller.admindash);
 router.get("/addstud",controller.addstud);
+router.get("/viewstud",controller.viewstud);
 
-module.exports=router;
 router.get("/about",controller.about);
 module.exports=router;  

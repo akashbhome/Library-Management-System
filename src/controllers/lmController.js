@@ -1,4 +1,5 @@
 let service=require("../services/lmService");
+
 exports.homepage=(req,res)=>{
         res.render("home.ejs");
 }
@@ -21,5 +22,17 @@ exports.about=(req,res)=>{
 }
 
 exports.addstud=(req,res)=>{
-        
+         res.render("addstud.ejs");
+}
+// exports.viewstud=(req,res)=>{
+//         res.render("viewstud.ejs");
+// }
+
+exports.viewstud=async (req,res)=>{
+   
+    let result=
+    catch(err){
+        console.log(err);
+        res.render("error");
+    }
 }
