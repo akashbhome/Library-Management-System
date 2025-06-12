@@ -1,0 +1,39 @@
+.nav{
+    display:flex;
+    justify-content: space-between;
+    padding: 13px 250px 13px 70px;
+    background-color: rgba(237, 143, 143, 0.7);
+
+}
+.nav ul{
+    display:flex;
+    gap:45px;
+    padding: 5px;
+    list-style-type:none;
+    margin-top:10px ;
+   
+}
+.nav img{
+      width:60px;
+      height: 60px;
+      border-radius: 35px;
+      margin-top:4px;
+      margin-left: 30px;
+}
+.nav h2{
+    margin-left: -550px;
+    margin-top:20px ;
+    font-size :25px;
+}
+.nav ul a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color:black;
+}
+.nav ul a:hover{
+    color:rgb(245, 7, 7);
+}
+.nav ul li{
+     /* border:solid; */
+}

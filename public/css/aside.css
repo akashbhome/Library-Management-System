@@ -1,0 +1,18 @@
+ aside{
+    height:100%;
+    width:20%;
+    padding: 60px 30px;
+    background-color: rgb(87, 81, 81);
+
+}
+.dash{
+    width:40%;
+    height:100px;
+    margin: auto;
+    margin-bottom: 40px;
+    border-radius: 100px;
+    background-image: url(/image/logo1.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+}
