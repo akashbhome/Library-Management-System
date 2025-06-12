@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/Library-Management-System/public/css/addstud.css">
 </head>
 <body>
     <div class="container">
         <form action="">
-            <input type="text" id="name" value="" placeholder="Enter Student Nmae">
-            <input type="text" id="email" value="" placeholder="Enter Email">
-            <input type="password" id="password" value="" placeholder="password">
+            <input type="text" id="name" value=""  name="name" placeholder="Enter Student Nmae">
+            <input type="text" id="email" value="" name="email" placeholder="Enter Email">
+            <input type="password" id="password" value="" name="password" placeholder="password">
             <select name="role" id="">
-                <option value="">user</option>
+                <option value="">Librarian</option>
+                <option value="">Student</option>
+                <option value="">Member</option>
             </select>
             <input type="button" value="submit" placeholder="Add Student" >
             </form>
