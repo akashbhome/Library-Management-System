@@ -22,7 +22,7 @@ exports.viewStudent = () => {
             });
     });
 };
-
+ 
 exports.deleteUser = (id) => {
     return new Promise((resolve, reject) => {
         conn.query("delete from users where id=?",[id],(err, result) => {
@@ -35,3 +35,14 @@ exports.deleteUser = (id) => {
             });
     });
 };
+
+exports.updateUser = (id) => {
+    return new Promise((resolve, reject) => {
+                conn.query("select * from users where id=?",[id],(err, result) => {
+                if (err) {     
+                return reject(err);
+                }
+                resolve(result);
+            });
+            });
+        }

@@ -41,11 +41,23 @@ exports.stdAdd = (req, res) => {
             res.render("addstud.ejs", { msg: "Error occurred" });
         });
 };
-exports.stdUpdate=(req,res)=>{
-res.render("stdupdate.ejs");
-}
+exports.stdUpdate = (req, res) => {
+    let id = parseInt(req.query.id.trim());
+    let result = adminModel.updateUser(id);
+    
+    result.then((r) => {
+        if (r.length > 0) {
+            res.render("stdupdate.ejs", { std: r[0] });
+        } else {
+            res.render("stdupdate.ejs", { std:[] });
+        }
+    }).catch((err) => {
+        res.render("err.ejs");
+    });
+};
 
 exports.viewStudent=(req,res)=>{
+        
         let result=adminModel.viewStudent();
         result.then((r)=>{
                 if(r.length>0)
@@ -62,7 +74,6 @@ exports.viewStudent=(req,res)=>{
 }
 exports.deleteUser=(req,res)=>{
        let id=parseInt(req.query.id.trim());
-        console.log(id);
         let result=adminModel.deleteUser(id);
         result.then((r)=>{
                 if(r.length>0)
