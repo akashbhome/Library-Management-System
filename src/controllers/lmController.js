@@ -56,7 +56,24 @@ exports.stdUpdate = (req, res) => {
         res.render("err.ejs");
     });
 };
+exports.newUpdatedUser=(req,res)=>{
 
+         let id = parseInt(req.query.id.trim());
+        let {name,email,password,role}=req.body;
+        
+        let result=adminModel.newUpdatedUser(name,email,password,role,id);
+         result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("view.ejs",{data:r});
+                }
+                 else{
+                          res.render("view.ejs",{data:[]});
+                 }
+        }).catch((err)=>{
+                res.render("err.ejs"); 
+        });
+}
 exports.viewStudent=(req,res)=>{
         
         let result=adminModel.viewStudent();
@@ -128,10 +145,10 @@ exports.deletecategory=(req,res)=>{
         result.then((r)=>{
                 if(r.length>0)
                 {
-                        res.render("viewcategory.ejs",{data:r});
+                        res.render("viewcategory.ejs",{cat:r});
                 }
                 else{
-                        res.render("viewcategory.ejs",{data:[]});
+                        res.render("viewcategory.ejs",{cat:[]});
                 }
         }).catch((err)=>{
                 res.render("err.ejs");
@@ -140,19 +157,19 @@ exports.deletecategory=(req,res)=>{
 
 // Update Category
 
-exports.updatecategory=(req, res) => {
-        let id=parseInt(req.query.id.trim());
-        let result=adminModel.updatecat(id);
-        result.then((r) => {
-                if(r.length>0)
-                {
-                        res.render("viewcategory.ejs");
-                }
-                else{
-                        res.render("viewcategory.ejs");
-                }
-        }).catch((err) => {
-                res.render("err.ejs");
-        });
+// exports.updatecategory=(req, res) => {
+//         let id=parseInt(req.query.id.trim());
+//         let result=adminModel.updatecat(id);
+//         result.then((r) => {
+//                 if(r.length>0)
+//                 {
+//                         res.render("viewcategory.ejs");
+//                 }
+//                 else{
+//                         res.render("viewcategory.ejs");
+//                 }
+//         }).catch((err) => {
+//                 res.render("err.ejs");
+//         });
 
-}
+// }
