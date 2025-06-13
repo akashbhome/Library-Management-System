@@ -87,3 +87,11 @@ exports.deleteUser=(req,res)=>{
                 res.render("err.ejs"); 
         });
 }
+
+//add category
+
+exports.addcategory=(req,res)=>{
+
+        
+        res.render("addcategory.ejs");
+}

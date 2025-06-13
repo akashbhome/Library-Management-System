@@ -1,0 +1,32 @@
+ body{
+        height: 100vh;
+    }
+    .main{
+            width:100%;
+            height: 100%;
+            display:flex;
+            
+    }
+    .side{
+        width:25%;
+        height: 100%;
+    }
+    .rigth{
+        width:75%;
+       
+    }
+    .addcat{
+        width:50%;
+        margin: 100px auto;
+        border-radius: 10px 0px;
+        border: solid 1px black;
+        text-align: center;
+        padding: 30px;
+         background-color: rgba(97, 199, 28, 0.7);
+    }
+    .addcat input{
+        width:60%;
+        height: 40px;
+        margin-top: 15px;
+    }
+    
