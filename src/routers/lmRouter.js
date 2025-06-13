@@ -11,4 +11,5 @@ router.post("/stduser",controller.stdAdd);
 router.get("/update",controller.stdUpdate);
 router.get("/view",controller.viewStudent);
 router.get("/deleteUser",controller.deleteUser);
+router.get("/viewcategory",controller.viewcategory);
 module.exports=router;  
