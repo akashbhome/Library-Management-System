@@ -67,3 +67,38 @@ exports.addcategory=(catname)=>{
         }
     });
 }
+        }
+
+   // Delete Category
+
+exports.deletecat=(id) => {
+    return new Promise((resolve,reject) => {
+        conn.query("delete from categories where id=?",[id],(err,result) => {
+            conn.query("select * from categories ",(err1,result1)=>{
+                if (err) {
+                    return reject(err1);
+                }
+                else{
+                    resolve(result);
+                }
+            });
+        });
+    });
+}
+
+// Update Category
+
+exports.updatecat= (id) =>{
+    return new Promise((resolve, reject) => {
+        conn.query("select * from categories where id=?",[id],(err,result) => {
+            if (err)
+            {
+                return reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        });
+    });
+
+}
