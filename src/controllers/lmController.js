@@ -70,7 +70,7 @@ exports.deleteUser=(req,res)=>{
                         res.render("view.ejs",{data:r});
                 }
                  else{
-                          res.render("view.ejs",{data:[]});
+                          res.render("view.ejs",{data:[]});     
                  }
         }).catch((err)=>{
                 res.render("err.ejs"); 
