@@ -1,5 +1,6 @@
 let service=require("../services/lmService");
 let adminModel=require("../models/lmModel.js");
+const { name } = require("ejs");
 exports.homepage=(req,res)=>{
         res.render("home.ejs");
 }
@@ -115,4 +116,43 @@ exports.catdataAdd=(req,res)=>{
                  res.render("addcategory.ejs",{msg:"catregory added Successfully"});
         }
        
- }
+       
+        res.render("addcategory.ejs");
+}
+
+// delete category
+
+exports.deletecategory=(req,res)=>{
+        let id=parseInt(req.query.id.trim());
+        let result=adminModel.deletecat(id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("viewcategory.ejs",{data:r});
+                }
+                else{
+                        res.render("viewcategory.ejs",{data:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
+}
+
+// Update Category
+
+exports.updatecategory=(req, res) => {
+        let id=parseInt(req.query.id.trim());
+        let result=adminModel.updatecat(id);
+        result.then((r) => {
+                if(r.length>0)
+                {
+                        res.render("viewcategory.ejs");
+                }
+                else{
+                        res.render("viewcategory.ejs");
+                }
+        }).catch((err) => {
+                res.render("err.ejs");
+        });
+
+}

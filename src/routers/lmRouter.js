@@ -14,4 +14,6 @@ router.get("/deleteUser",controller.deleteUser);
 router.get("/addcategory",controller.addcategory);
 router.get("/viewcategory",controller.viewcategory);
 router.post("/catdataAdd",controller.catdataAdd)
+router.get("/deletecategory",controller.deletecategory);
+router.get("/updatecategory",controller.updatecategory);
 module.exports=router;  
