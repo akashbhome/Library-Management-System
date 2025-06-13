@@ -128,10 +128,10 @@ exports.deletecategory=(req,res)=>{
         result.then((r)=>{
                 if(r.length>0)
                 {
-                        res.render("viewcategory.ejs",{data:r});
+                        res.render("viewcategory.ejs",{cat:r});
                 }
                 else{
-                        res.render("viewcategory.ejs",{data:[]});
+                        res.render("viewcategory.ejs",{cat:[]});
                 }
         }).catch((err)=>{
                 res.render("err.ejs");

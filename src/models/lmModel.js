@@ -79,7 +79,7 @@ exports.deletecat=(id) => {
                     return reject(err1);
                 }
                 else{
-                    resolve(result);
+                    resolve(result1);
                 }
             });
         });
