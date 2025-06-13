@@ -44,3 +44,35 @@ exports.stdAdd = (req, res) => {
 exports.stdUpdate=(req,res)=>{
 res.render("stdupdate.ejs");
 }
+
+exports.viewStudent=(req,res)=>{
+        let result=adminModel.viewStudent();
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("viewstud.ejs",{data:r});
+                }
+                 else{
+                          res.render("viewstud.ejs",{data:[]});
+                 }
+        }).catch((err)=>{
+                res.render("err.ejs"); 
+        });
+    
+}
+exports.deleteUser=(req,res)=>{
+       let id=parseInt(req.query.id.trim());
+        console.log(id);
+        let result=adminModel.deleteUser(id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("viewstud.ejs",{data:r});
+                }
+                 else{
+                          res.render("viewstud.ejs",{data:[]});
+                 }
+        }).catch((err)=>{
+                res.render("err.ejs"); 
+        });
+}

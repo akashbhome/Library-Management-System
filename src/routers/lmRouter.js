@@ -9,4 +9,6 @@ router.get("/addReg",controller.addReg);
 router.get("/about",controller.about);
 router.post("/stduser",controller.stdAdd);
 router.get("/update",controller.stdUpdate);
+router.get("/view",controller.viewStudent);
+router.get("/deleteUser",controller.deleteUser);
 module.exports=router;  

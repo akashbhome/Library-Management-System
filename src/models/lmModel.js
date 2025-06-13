@@ -32,4 +32,26 @@ exports.addStd = (name, email, password, role) => {
             });
     });
 };
+exports.viewStudent = () => {
+    return new Promise((resolve, reject) => {
+        conn.query("select * from users",(err, result) => {
+                if (err) {     
+                return reject(err);
+                }
+                resolve(result);
+            });
+    });
+};
 
+exports.deleteUser = (id) => {
+    return new Promise((resolve, reject) => {
+        conn.query("delete from users where id=?",[id],(err, result) => {
+                conn.query("select * from users",(err1, result1) => {
+                if (err) {     
+                return reject(err1);
+                }
+                resolve(result1);
+            });
+            });
+    });
+};
