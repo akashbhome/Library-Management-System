@@ -16,7 +16,7 @@
         <div class="rightSide">
             <div class="updateStd">
                 <h1>Update User</h1>
-                <form action="/updatecategory?id=<%=std.id%>" method="POST">
+                <form action="/updateUser?id=<%=std.id%>" method="POST">
                     <input type="text" id="name" value="<%= std.name || '' %>" name="name" placeholder="Enter the updated name"><br>
 
                     <input type="text" id="email" value="<%= std.email || '' %>" name="email" placeholder="Enter the updated Email"><br>
@@ -29,7 +29,7 @@
                         <!-- Add more roles if needed -->
                     </select><br>
 
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Update">
                 </form>
             </div>
         </div>

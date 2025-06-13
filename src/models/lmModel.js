@@ -15,19 +15,19 @@ exports.addStd = (name, email, password, role) => {
 exports.viewStudent = () => {
     return new Promise((resolve, reject) => {
         conn.query("select * from users",(err, result) => {
-                if (err) {     
+                if (err) {
                 return reject(err);
                 }
                 resolve(result);
             });
     });
 };
- 
+
 exports.deleteUser = (id) => {
     return new Promise((resolve, reject) => {
         conn.query("delete from users where id=?",[id],(err, result) => {
                 conn.query("select * from users",(err1, result1) => {
-                if (err) {     
+                if (err) {
                 return reject(err1);
                 }
                 resolve(result1);
@@ -39,7 +39,7 @@ exports.deleteUser = (id) => {
 exports.updateUser = (id) => {
     return new Promise((resolve, reject) => {
                 conn.query("select * from users where id=?",[id],(err, result) => {
-                if (err) {     
+                if (err) {
                 return reject(err);
                 }
                 resolve(result);
@@ -47,15 +47,11 @@ exports.updateUser = (id) => {
             });
 }
 exports.newUpdatedUser=(name,email,password,role,id)=>{
-     return new Promise((resolve, reject) => {
-        console.log(id);
-        console.log(name);
-        console.log(email);
-        console.log(password);
-        console.log(role);
+    return new Promise((resolve, reject) => {
+        
         conn.query("UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?",[name,email,password,role,id],(err, result) => {
                 conn.query("select * from users",(err1, result1) => {
-                if (err) {     
+                if (err) {
                 return reject(err1);
                 }
                 resolve(result1);
@@ -64,9 +60,9 @@ exports.newUpdatedUser=(name,email,password,role,id)=>{
     });
 }
 exports.viewcategory=()=>{
-     return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
                 conn.query("select * from categories",(err, result) => {
-                if (err) {     
+                if (err) {
                 return reject(err);
                 }
                 resolve(result);
@@ -105,17 +101,33 @@ exports.deletecat=(id) => {
 
 // Update Category
 
-// exports.updatecat= (id) =>{
-//     return new Promise((resolve, reject) => {
-//         conn.query("select * from categories where id=?",[id],(err,result) => {
-//             if (err)
-//             {
-//                 return reject(err);
-//             }
-//             else{
-//                 resolve(result);
-//             }
-//         });
-//     });
+exports.updatecat= (id) =>{
+    return new Promise((resolve, reject) => {
+        conn.query("select * from categories where id=?",[id],(err,result) => {
+            if (err)
+            {
+                return reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        });
+    });
 
-// }
+}
+
+exports.newUpdatedcat=(name,id)=>{
+    return new Promise((resolve, reject) => {
+        console.log(id);
+        
+        console.log(name);
+        conn.query("UPDATE categories SET name = ? WHERE id = ?",[name,id],(err, result) => {
+                conn.query("select * from categories",(err1, result1) => {
+                if (err) {
+                return reject(err1);
+                }
+                resolve(result1);
+            });
+            });
+    });
+}

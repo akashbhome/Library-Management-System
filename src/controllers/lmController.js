@@ -25,53 +25,52 @@ exports.about=(req,res)=>{
 exports.addReg=(req,res)=>{
         res.render("addstud.ejs",{msg:""});
 }
-// 
+//
 exports.stdAdd = (req, res) => {
-    let { name, email, password, role } = req.body;
+        let { name, email, password, role } = req.body;
 
-    adminModel.addStd(name, email, password, role)
+        adminModel.addStd(name, email, password, role)
         .then((result) => {
-            if (result) {
-                res.render("addstud.ejs", { msg: "Success" });
-            } else {
+                if (result) {
+                        res.render("addstud.ejs", { msg: "Success" });
+                } else {
                 res.render("addstud.ejs", { msg: "Failed" });
-            }
+                }
         })
         .catch((err) => {
-            console.error("Error:", err);
-            res.render("addstud.ejs", { msg: "Error occurred" });
+                console.error("Error:", err);
+                res.render("addstud.ejs", { msg: "Error occurred" });
         });
 };
 exports.stdUpdate = (req, res) => {
-    let id = parseInt(req.query.id.trim());
-    let result = adminModel.updateUser(id);
-    
-    result.then((r) => {
+        let id = parseInt(req.query.id.trim());
+        let result = adminModel.updateUser(id);
+        result.then((r) => {
         if (r.length > 0) {
-            res.render("stdupdate.ejs", { std: r[0] });
+                res.render("stdupdate.ejs", { std: r[0] });
         } else {
-            res.render("stdupdate.ejs", { std:[] });
+                res.render("stdupdate.ejs", { std:[] });
         }
-    }).catch((err) => {
-        res.render("err.ejs");
-    });
+        }).catch((err) => {
+                res.render("err.ejs");
+        });
 };
 exports.newUpdatedUser=(req,res)=>{
 
-         let id = parseInt(req.query.id.trim());
+        let id = parseInt(req.query.id.trim());
         let {name,email,password,role}=req.body;
         
         let result=adminModel.newUpdatedUser(name,email,password,role,id);
-         result.then((r)=>{
+        result.then((r)=>{
                 if(r.length>0)
                 {
                         res.render("view.ejs",{data:r});
                 }
-                 else{
-                          res.render("view.ejs",{data:[]});
-                 }
+                else{
+                        res.render("view.ejs",{data:[]});
+                }
         }).catch((err)=>{
-                res.render("err.ejs"); 
+                res.render("err.ejs");
         });
 }
 exports.viewStudent=(req,res)=>{
@@ -82,27 +81,26 @@ exports.viewStudent=(req,res)=>{
                 {
                         res.render("view.ejs",{data:r});
                 }
-                 else{
-                          res.render("view.ejs",{data:[]});
-                 }
+                else{
+                        res.render("view.ejs",{data:[]});
+                }
         }).catch((err)=>{
-                res.render("err.ejs"); 
+                res.render("err.ejs");
         });
-    
 }
 exports.deleteUser=(req,res)=>{
-       let id=parseInt(req.query.id.trim());
+        let id=parseInt(req.query.id.trim());
         let result=adminModel.deleteUser(id);
         result.then((r)=>{
                 if(r.length>0)
                 {
                         res.render("view.ejs",{data:r});
                 }
-                 else{
-                          res.render("view.ejs",{data:[]});     
-                 }
+                else{
+                        res.render("view.ejs",{data:[]});
+                }
         }).catch((err)=>{
-                res.render("err.ejs"); 
+                res.render("err.ejs");
         });
 }
 exports.viewcategory=(req,res)=>{
@@ -120,21 +118,18 @@ exports.viewcategory=(req,res)=>{
 //add category
 
 exports.addcategory=(req,res)=>{
-         res.render("addcategory.ejs",{msg:""});
+        res.render("addcategory.ejs",{msg:""});
 }
 exports.catdataAdd=(req,res)=>{
 
         let {catname}=req.body;
         let result=adminModel.addcategory(catname);
         if(result){
-                 res.render("addcategory.ejs",{msg:"failed"});
+                res.render("addcategory.ejs",{msg:"failed"});
         }
         else{
-                 res.render("addcategory.ejs",{msg:"catregory added Successfully"});
+                res.render("addcategory.ejs",{msg:"catregory added Successfully"});
         }
-       
-       
-        res.render("addcategory.ejs");
 }
 
 // delete category
@@ -157,19 +152,37 @@ exports.deletecategory=(req,res)=>{
 
 // Update Category
 
-// exports.updatecategory=(req, res) => {
-//         let id=parseInt(req.query.id.trim());
-//         let result=adminModel.updatecat(id);
-//         result.then((r) => {
-//                 if(r.length>0)
-//                 {
-//                         res.render("viewcategory.ejs");
-//                 }
-//                 else{
-//                         res.render("viewcategory.ejs");
-//                 }
-//         }).catch((err) => {
-//                 res.render("err.ejs");
-//         });
+exports.updatecategory=(req, res) => {
+        let id=parseInt(req.query.id.trim());
+        let result=adminModel.updatecat(id);
+        result.then((r) => {
+                if(r.length>0)
+                {
+                        res.render("catupdate.ejs",{data:r[0]});
+                }
+                else{
+                        res.render("catupdate.ejs",{data:[]});
+                }
+        }).catch((err) => {
+                res.render("err.ejs");
+        });
 
-// }
+}
+
+exports.newUpdatedcat=(req,res)=>{
+        let id = parseInt(req.query.id.trim());
+        let {name}=req.body;
+        
+        let result=adminModel.newUpdatedcat(name,id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("viewcategory.ejs",{cat:r});
+                }
+                else{
+                        res.render("viewcategory.ejs",{cat:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
+}
