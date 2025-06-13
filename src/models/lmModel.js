@@ -56,3 +56,14 @@ exports.viewcategory=()=>{
             });
             });
 }
+exports.addcategory=(catname)=>{
+    conn.query("insert into categories values (?,?)",['0',catname],(err,result)=>{
+        if(err)
+        {
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    });
+}

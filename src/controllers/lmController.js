@@ -33,7 +33,7 @@ exports.stdAdd = (req, res) => {
             if (result) {
                 res.render("addstud.ejs", { msg: "Success" });
             } else {
-                res.render("addstud.ejs", { msg: "Fail" });
+                res.render("addstud.ejs", { msg: "Failed" });
             }
         })
         .catch((err) => {
@@ -102,7 +102,17 @@ exports.viewcategory=(req,res)=>{
 //add category
 
 exports.addcategory=(req,res)=>{
+         res.render("addcategory.ejs",{msg:""});
+}
+exports.catdataAdd=(req,res)=>{
 
-        
-        res.render("addcategory.ejs");
+        let {catname}=req.body;
+        let result=adminModel.addcategory(catname);
+        if(result){
+                 res.render("addcategory.ejs",{msg:"failed"});
+        }
+        else{
+                 res.render("addcategory.ejs",{msg:"catregory added Successfully"});
+        }
+       
 }
