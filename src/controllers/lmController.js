@@ -87,6 +87,17 @@ exports.deleteUser=(req,res)=>{
                 res.render("err.ejs"); 
         });
 }
+exports.viewcategory=(req,res)=>{
+        let result=adminModel.viewcategory();
+        result.then((r)=>{
+                if(r.length>0){
+                        res.render("viewcategory.ejs",{cat:r});
+                }
+                else{
+                        res.render("viewcategory.ejs",{cat:[]});
+                }
+        })
+}
 
 //add category
 

@@ -45,4 +45,14 @@ exports.updateUser = (id) => {
                 resolve(result);
             });
             });
-        }
+}
+exports.viewcategory=()=>{
+     return new Promise((resolve, reject) => {
+                conn.query("select * from categories",(err, result) => {
+                if (err) {     
+                return reject(err);
+                }
+                resolve(result);
+            });
+            });
+}
