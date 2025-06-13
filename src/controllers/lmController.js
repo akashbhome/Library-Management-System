@@ -67,10 +67,10 @@ exports.deleteUser=(req,res)=>{
         result.then((r)=>{
                 if(r.length>0)
                 {
-                        res.render("viewstud.ejs",{data:r});
+                        res.render("view.ejs",{data:r});
                 }
                  else{
-                          res.render("viewstud.ejs",{data:[]});
+                          res.render("view.ejs",{data:[]});
                  }
         }).catch((err)=>{
                 res.render("err.ejs"); 
