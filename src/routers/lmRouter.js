@@ -5,8 +5,10 @@ let router=routers.Router();
 router.get("/",controller.homepage);
 router.get("/login",controller.adminLogin);
 router.post("/adminLog",controller.admindash);
-router.get("/addstud",controller.addstud);
-
-
+router.get("/addReg",controller.addReg);
 router.get("/about",controller.about);
+router.post("/stduser",controller.stdAdd);
+router.get("/update",controller.stdUpdate);
+router.get("/view",controller.viewStudent);
+router.get("/deleteUser",controller.deleteUser);
 module.exports=router;  
