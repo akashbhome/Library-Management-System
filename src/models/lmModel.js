@@ -67,7 +67,7 @@ exports.addcategory=(catname)=>{
         }
     });
 }
-        }
+        
 
    // Delete Category
 
