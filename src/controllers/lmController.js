@@ -115,4 +115,4 @@ exports.catdataAdd=(req,res)=>{
                  res.render("addcategory.ejs",{msg:"catregory added Successfully"});
         }
        
-}
+ }
