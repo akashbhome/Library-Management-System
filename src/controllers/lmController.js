@@ -1,13 +1,16 @@
-let service=require("../services/lmService");
-let adminModel=require("../models/lmModel.js");
-const { name } = require("ejs");
-exports.homepage=(req,res)=>{
+let service=require("../services/lmService");      //import the servises folder
+let adminModel=require("../models/lmModel.js");         //import the  model folder
+
+exports.homepage=(req,res)=>{                           //call the home page at the server will start
         res.render("home.ejs");
 }
-exports.adminLogin=(req,res)=>{
+
+
+exports.adminLogin=(req,res)=>{                                //call login page
         res.render("loginpage.ejs",{msg:""});
 }
-exports.admindash=(req,res)=>{
+
+exports.admindash=(req,res)=>{                                  //after login login successfullt then go to admindaesh board
         let {username,password}=req.body;
 
         if(username==="admin@123" &&password==="admin")
@@ -18,44 +21,72 @@ exports.admindash=(req,res)=>{
                 res.render("loginpage.ejs",{msg:"Invalid username and Password"});
         }
 }
+
+
 exports.about=(req,res)=>{
         res.render("about.ejs");
 }
 
-exports.addReg=(req,res)=>{
+
+
+exports.addReg=(req,res)=>{                                                     //member or user regitsrtion page calling
         res.render("addstud.ejs",{msg:""});
 }
-// 
-exports.stdAdd = (req, res) => {
-    let { name, email, password, role } = req.body;
 
-    adminModel.addStd(name, email, password, role)
+//user or member add section
+
+exports.stdAdd = (req, res) => {
+        let { name, email, password, role } = req.body;
+
+        adminModel.addStd(name, email, password, role)
         .then((result) => {
-            if (result) {
-                res.render("addstud.ejs", { msg: "Success" });
-            } else {
-                res.render("addstud.ejs", { msg: "Fail" });
-            }
+                if (result) {
+                        res.render("addstud.ejs", { msg: "Success" });
+                } else {
+                res.render("addstud.ejs", { msg: "Failed" });
+                }
         })
         .catch((err) => {
-            console.error("Error:", err);
-            res.render("addstud.ejs", { msg: "Error occurred" });
+                res.render("addstud.ejs", { msg: "Error occurred" });
         });
 };
+
+// update user or memeber section
+
 exports.stdUpdate = (req, res) => {
-    let id = parseInt(req.query.id.trim());
-    let result = adminModel.updateUser(id);
-    
-    result.then((r) => {
+        let id = parseInt(req.query.id.trim());
+        let result = adminModel.updateUser(id);
+        result.then((r) => {
         if (r.length > 0) {
-            res.render("stdupdate.ejs", { std: r[0] });
+                res.render("stdupdate.ejs", { std: r[0] });
         } else {
-            res.render("stdupdate.ejs", { std:[] });
+                res.render("stdupdate.ejs", { std:[] });
         }
-    }).catch((err) => {
-        res.render("err.ejs");
-    });
+        }).catch((err) => {
+                res.render("err.ejs");
+        });
 };
+
+exports.newUpdatedUser=(req,res)=>{
+
+        let id = parseInt(req.query.id.trim());
+        let {name,email,password,role}=req.body;
+        
+        let result=adminModel.newUpdatedUser(name,email,password,role,id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("view.ejs",{data:r});
+                }
+                else{
+                        res.render("view.ejs",{data:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
+}
+
+// member and user view section
 
 exports.viewStudent=(req,res)=>{
         
@@ -65,38 +96,64 @@ exports.viewStudent=(req,res)=>{
                 {
                         res.render("view.ejs",{data:r});
                 }
-                 else{
-                          res.render("view.ejs",{data:[]});
-                 }
+                else{
+                        res.render("view.ejs",{data:[]});
+                }
         }).catch((err)=>{
-                res.render("err.ejs"); 
+                res.render("err.ejs");
         });
-    
 }
+
+//member delete section
+
 exports.deleteUser=(req,res)=>{
-       let id=parseInt(req.query.id.trim());
+        let id=parseInt(req.query.id.trim());
         let result=adminModel.deleteUser(id);
         result.then((r)=>{
                 if(r.length>0)
                 {
                         res.render("view.ejs",{data:r});
                 }
-                 else{
-                          res.render("view.ejs",{data:[]});     
-                 }
+                else{
+                        res.render("view.ejs",{data:[]});
+                }
         }).catch((err)=>{
-                res.render("err.ejs"); 
+                res.render("err.ejs");
         });
 }
 
-//add category
+// view category section
 
-exports.addcategory=(req,res)=>{
-       
-        res.render("addcategory.ejs");
+exports.viewcategory=(req,res)=>{
+        let result=adminModel.viewcategory();
+        result.then((r)=>{
+                if(r.length>0){
+                        res.render("viewcategory.ejs",{cat:r});
+                }
+                else{
+                        res.render("viewcategory.ejs",{cat:[]});
+                }
+        })
 }
 
-// delete category
+//add category section
+
+exports.addcategory=(req,res)=>{
+        res.render("addcategory.ejs",{msg:""});
+}
+exports.catdataAdd=(req,res)=>{
+
+        let {catname}=req.body;
+        let result=adminModel.addcategory(catname);
+        if(result){
+                res.render("addcategory.ejs",{msg:"failed"});
+        }
+        else{
+                res.render("addcategory.ejs",{msg:"catregory added Successfully"});
+        }
+}
+
+// delete category section
 
 exports.deletecategory=(req,res)=>{
         let id=parseInt(req.query.id.trim());
@@ -104,17 +161,17 @@ exports.deletecategory=(req,res)=>{
         result.then((r)=>{
                 if(r.length>0)
                 {
-                        res.render("viewcategory.ejs",{data:r});
+                        res.render("viewcategory.ejs",{cat:r});
                 }
                 else{
-                        res.render("viewcategory.ejs",{data:[]});
+                        res.render("viewcategory.ejs",{cat:[]});
                 }
         }).catch((err)=>{
                 res.render("err.ejs");
         });
 }
 
-// Update Category
+// Update Category section
 
 exports.updatecategory=(req, res) => {
         let id=parseInt(req.query.id.trim());
@@ -122,13 +179,31 @@ exports.updatecategory=(req, res) => {
         result.then((r) => {
                 if(r.length>0)
                 {
-                        res.render("viewcategory.ejs");
+                        res.render("catupdate.ejs",{data:r[0]});
                 }
                 else{
-                        res.render("viewcategory.ejs");
+                        res.render("catupdate.ejs",{data:[]});
                 }
         }).catch((err) => {
                 res.render("err.ejs");
         });
 
+}
+
+exports.newUpdatedcat=(req,res)=>{
+        let id = parseInt(req.query.id.trim());
+        let {name}=req.body;
+        
+        let result=adminModel.newUpdatedcat(name,id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("viewcategory.ejs",{cat:r});
+                }
+                else{
+                        res.render("viewcategory.ejs",{cat:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
 }

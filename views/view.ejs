@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/view.css">
 </head>
 <body>
-   <%-include("nav.ejs")%>
+  <%-include("nav.ejs")%>
     <div class="main w-100 ">
         <div class="side">
             <%-include("aside.ejs")%>
@@ -23,15 +23,15 @@
       <th scope="col">Email</th>
       <th scope="col">Role</th>
       <th scope="col">Admission Date</th>
-      <th scope="col">Update</th>
       <th scope="col">Delete</th>
+      <th scope="col">Update</th>
     </tr>
   </thead>
   <tbody id="tbody">
       <% if (data.length == 0) { %>
     <tr><td colspan="7">NO data Available</td></tr>
-     <% } else { 
-                 data.forEach((item, index) => { 
+    <% } else {
+                data.forEach((item, index) => {
         %>
         <tr>
       <td><%= index+1 %></td>

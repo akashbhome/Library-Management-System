@@ -1,4 +1,4 @@
- body{
+    body{
         height: 100vh;
     }
     .main{
@@ -13,7 +13,6 @@
     }
     .rigth{
         width:75%;
-       
     }
     .addcat{
         width:50%;
@@ -21,12 +20,17 @@
         border-radius: 10px 0px;
         border: solid 1px black;
         text-align: center;
-        padding: 30px;
-         background-color: rgba(97, 199, 28, 0.7);
+        padding: 20px;
+        background-color: rgba(103, 106, 101, 0.7);
+    }
+    .addcat:hover{
+        width:60%;
+        background-color: rgba(72, 122, 209, 0.7);
     }
     .addcat input{
-        width:60%;
+        width:80%;
         height: 40px;
         margin-top: 15px;
+        margin-bottom: 20px;
     }
     

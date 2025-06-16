@@ -15,11 +15,11 @@
         <div class="rigth">
         <div class="addcat">
             <h1>Add User</h1>
-            <form action="/" method="POST">
-            <input type="text" id="name" value=""  name="name" placeholder="Enter Categoty Nmae"><br>
-                 
+            <form action="/catdataAdd" method="POST">
+            <input type="text" id="name" value="" name="catname" placeholder="Enter Categoty Name"><br>
+                
             <input type="submit" value="submit" placeholder="Add Category" ><br>
-            
+            <%- msg%>
             </form>
     </div>
 </div>

@@ -1,4 +1,6 @@
-const conn = require("../../db.js");
+const conn = require("../../db.js");        //connected database
+
+//add user on database
 
 exports.addStd = (name, email, password, role) => {
     return new Promise((resolve, reject) => {
@@ -12,22 +14,27 @@ exports.addStd = (name, email, password, role) => {
             });
     });
 };
+
+ //view user or member
+
 exports.viewStudent = () => {
     return new Promise((resolve, reject) => {
         conn.query("select * from users",(err, result) => {
-                if (err) {     
+                if (err) {
                 return reject(err);
                 }
                 resolve(result);
             });
     });
 };
- 
+
+// delete user and member in databese
+
 exports.deleteUser = (id) => {
     return new Promise((resolve, reject) => {
         conn.query("delete from users where id=?",[id],(err, result) => {
                 conn.query("select * from users",(err1, result1) => {
-                if (err) {     
+                if (err) {
                 return reject(err1);
                 }
                 resolve(result1);
@@ -36,18 +43,61 @@ exports.deleteUser = (id) => {
     });
 };
 
+//update user and member in database
+
 exports.updateUser = (id) => {
     return new Promise((resolve, reject) => {
                 conn.query("select * from users where id=?",[id],(err, result) => {
-                if (err) {     
+                if (err) {
                 return reject(err);
                 }
                 resolve(result);
             });
             });
-        }
+}
+exports.newUpdatedUser=(name,email,password,role,id)=>{
+    return new Promise((resolve, reject) => {
+        
+        conn.query("UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?",[name,email,password,role,id],(err, result) => {
+                conn.query("select * from users",(err1, result1) => {
+                if (err) {
+                return reject(err1);
+                }
+                resolve(result1);
+            });
+            });
+    });
+}
 
-   // Delete Category
+//view category
+
+exports.viewcategory=()=>{
+    return new Promise((resolve, reject) => {
+                conn.query("select * from categories",(err, result) => {
+                if (err) {
+                return reject(err);
+                }
+                resolve(result);
+            });
+            });
+}
+
+// add on database
+
+exports.addcategory=(catname)=>{
+    conn.query("insert into categories values (?,?)",['0',catname],(err,result)=>{
+        if(err)
+        {
+            return err;
+        }
+        else{
+            return 0;
+        }
+    });
+}
+        
+
+   // Delete Category on database
 
 exports.deletecat=(id) => {
     return new Promise((resolve,reject) => {
@@ -57,14 +107,14 @@ exports.deletecat=(id) => {
                     return reject(err1);
                 }
                 else{
-                    resolve(result);
+                    resolve(result1);
                 }
             });
         });
     });
 }
 
-// Update Category
+// Update Category on  database
 
 exports.updatecat= (id) =>{
     return new Promise((resolve, reject) => {
@@ -79,4 +129,17 @@ exports.updatecat= (id) =>{
         });
     });
 
+}
+
+exports.newUpdatedcat=(name,id)=>{
+    return new Promise((resolve, reject) => {
+        conn.query("UPDATE categories SET name = ? WHERE id = ?",[name,id],(err, result) => {
+                conn.query("select * from categories",(err1, result1) => {
+                if (err) {
+                return reject(err1);
+                }
+                resolve(result1);
+            });
+            });
+    });
 }
