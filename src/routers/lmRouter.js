@@ -14,4 +14,5 @@ router.get("/deleteUser",controller.deleteUser);
 router.get("/addcategory",controller.addcategory);
 router.get("/deletecategory",controller.deletecategory);
 router.get("/updatecategory",controller.updatecategory);
+
 module.exports=router;  
