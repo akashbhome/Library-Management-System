@@ -17,11 +17,6 @@ router.get("/viewcategory",controller.viewcategory);
 router.post("/catdataAdd",controller.catdataAdd)
 router.get("/deletecategory",controller.deletecategory);
 router.get("/updatecategory",controller.updatecategory);
-<<<<<<< HEAD
-
-module.exports=router;  
-=======
 router.post("/updatecat",controller.newUpdatedcat);
-
+router.get("/viewbook",controller.viewbook);
 module.exports=router;
->>>>>>> main

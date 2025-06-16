@@ -143,3 +143,19 @@ exports.newUpdatedcat=(name,id)=>{
             });
     });
 }
+
+// view book model
+exports.viewbook=() =>{
+    return new Promise((resolve,reject) => {
+        conn.query("Select * from books",(err,result) =>{
+            if(err) {
+                return reject(err);
+            }
+            else{
+                resolve (result);
+            }
+        });
+
+    });
+}
+
