@@ -1,6 +1,6 @@
 
 body{
-        height: 100vh;
+    min-height:100vh;
     }
     .main{
             width:100%;
@@ -13,4 +13,18 @@ body{
     }
     .rigth{
         width:75%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+    .books{
+        width:30%;
+        
+        border: solid 1px black;
+        box-shadow: 10px 10px 1px;
+    }
+    .books img{
+        width:40%;
     }

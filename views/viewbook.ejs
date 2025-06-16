@@ -7,51 +7,26 @@
     <link rel="stylesheet" href="/css/viewbook.css">
 </head>
 <body>
+    <%-include("nav.ejs")%>
     <div class="main w-100 ">
         <div class="side">
             <%-include("aside.ejs")%>
         </div>
         <div class="rigth">
-        <div class="container mt-5 mr-5">
-        <table class="table table-striped table-bordered ">
-<thead>
-<tr>
-    <th scope="col">sr.no</th>
-    <th scope="col">Title</th>
-    <th scope="col">Auther</th>
-    <th scope="col">Publisher</th>
-    <th scope="col">ISBN</th>
-    <th scope="col">Category</th>
-    <th scope="col">Total_Copies</th>
-    <th scope="col">Status</th>
-    <th scope="col">Image</th>
-    <th scope="col">Created at</th>
-    <th scope="col">Delete</th>
-    <th scope="col">Update</th>
-    </tr>
-</thead>
-<tbody id="tbody">
-<% if (data.length == 0) { %>
-    <tr><td colspan="12">NO data Available</td></tr>
+        
+        <% if (data.length == 0) { %>
+    <label for="">NO data Available</label>
     <% } else {
-                data.forEach((item, index) => {
+                data.forEach((item) => {
         %>
-        <tr>
-    <td><%= index+1 %></td>
-    <td><%= item.title %></td>
-    <td><%= item.auther %></td>
-    <td><%= item.publisher%></td>
-    <td><%= item.category%></td>
-    <td><%= item.total_copies%></td>
-    <td><%= item.status%></td>
-    <td><%= item.image%></td>
-    <td><%= item.created_at%></td>
-    <td><a href="">Delete</a></td>
-    <td><a href="">Update</a></td>
-    </tr>
+       <div class="books">
+           <img src="<%=item.image%>" alt="NO image found">
+           <label for="">Title : <%=item.title%></label>
+
+       </div>
+
     <%})}%>
-</tbody>
-</table>
+
     </div>
 </div>
 </div>
