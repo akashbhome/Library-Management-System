@@ -19,6 +19,7 @@ router.post("/catdataAdd",controller.catdataAdd)
 router.get("/deletecategory",controller.deletecategory);
 router.get("/updatecategory",controller.updatecategory);
 router.post("/updatecat",controller.newUpdatedcat);
+router.get("/viewbook",controller.viewbook);
 router.get("/addBookPage",controller.addBookPage);
 router.post("/addBook",upload.single('image'),controller.addBook);
 module.exports=router;

@@ -122,20 +122,6 @@ exports.deleteUser=(req,res)=>{
         });
 }
 
-// view category section
-
-exports.viewcategory=(req,res)=>{
-        let result=adminModel.viewcategory();
-        result.then((r)=>{
-                if(r.length>0){
-                        res.render("viewcategory.ejs",{cat:r});
-                }
-                else{
-                        res.render("viewcategory.ejs",{cat:[]});
-                }
-        })
-}
-
 //add category section
 
 exports.addcategory=(req,res)=>{
@@ -151,6 +137,20 @@ exports.catdataAdd=(req,res)=>{
         else{
                 res.render("addcategory.ejs",{msg:"catregory added Successfully"});
         }
+}
+
+// view category section
+
+exports.viewcategory=(req,res)=>{
+        let result=adminModel.viewcategory();
+        result.then((r)=>{
+                if(r.length>0){
+                        res.render("viewcategory.ejs",{cat:r});
+                }
+                else{
+                        res.render("viewcategory.ejs",{cat:[]});
+                }
+        })
 }
 
 // delete category section
@@ -205,11 +205,26 @@ exports.newUpdatedcat=(req,res)=>{
                 }
         }).catch((err)=>{
                 res.render("err.ejs");
+
         });
+}
+
+// View Book Session
+exports.viewbook=(req,res)=> {
+        console.log("hello");
+        let result=adminModel.viewbook();
+        result.then((r) => {
+        if(r.length>0){
+                res.render("viewbook.ejs",{data:r});
+        }
+        else{
+                res.render("viewbook.ejs",{data:[]});
+        }
+});
 }
 exports.addBookPage=(req,res)=>{
         let categories=adminModel.viewcategory();
-       categories.then((r)=>{
+        categories.then((r)=>{
                 if(r.length>0){
                         res.render("addBooks.ejs",{cat:r,msg:""});
                 }

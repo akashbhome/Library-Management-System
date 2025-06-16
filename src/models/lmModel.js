@@ -147,6 +147,22 @@ exports.newUpdatedcat=(name,id)=>{
     });
 }
 
+// view book model
+exports.viewbook=() =>{
+    return new Promise((resolve,reject) => {
+        conn.query("Select * from books",(err,result) =>{
+            if(err) {
+                return reject(err);
+            }
+            else{
+                resolve (result);
+            }
+        });
+
+    });
+}
+
+
 //  Add book on Database
 
 exports.addBook=(title,author,publisher,isbn,category,total_copies,available_copies,status,image)=>{
@@ -164,7 +180,7 @@ exports.addBook=(title,author,publisher,isbn,category,total_copies,available_cop
                         console.log(status);
                             console.log(image); 
         conn.query("INSERT INTO books(title,author,publisher,isbn,category,total_copies,available_copies,status,image,created_at) VALUES (?, ?, ?, ?,?,?,?,?,?,?)",
-                                     [title,author,publisher,isbn,category,total_copies,available_copies,status,image,today], (err, result) => {
+                                    [title,author,publisher,isbn,category,total_copies,available_copies,status,image,today], (err, result) => {
         conn.query("select * from categories",(err1, result1) => {
                 if (err) {
                 return reject(err);
