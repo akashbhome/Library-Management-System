@@ -1,6 +1,6 @@
 let service=require("../services/lmService");
 let adminModel=require("../models/lmModel.js");
-const { name } = require("ejs");
+let upload=
 exports.homepage=(req,res)=>{
         res.render("home.ejs");
 }
@@ -185,4 +185,27 @@ exports.newUpdatedcat=(req,res)=>{
         }).catch((err)=>{
                 res.render("err.ejs");
         });
+}
+exports.addBookPage=(req,res)=>{
+        let categories=adminModel.viewcategory();
+       categories.then((r)=>{
+                if(r.length>0){
+                        res.render("addBooks.ejs",{cat:r,msg:""});
+                }
+                else{
+                        res.render("addBooks.ejs",{cat:[],msg:""});
+                }
+        })
+}
+exports.addBook=(req,res)=>{
+        let {title,author,publisher,isbn,category,total_copies,available_copies,status}=req.body;
+        const image= '/uploads/' + req.file.filename;
+
+        let result=adminModel.addBook(title,author,publisher,isbn,category,total_copies,available_copies,status,image);
+        result.then((r)=>{
+                res.render("addBooks.ejs",{cat:r,msg:"Book Added SuccessFully"});
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
+
 }

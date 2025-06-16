@@ -2,8 +2,9 @@ const conn = require("../../db.js");
 
 exports.addStd = (name, email, password, role) => {
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
-            [name, email, password, role], (err, result) => {
+    const today = new Date().toISOString().split('T')[0];
+        conn.query("INSERT INTO users (name, email, password, role,created_at) VALUES (?, ?, ?, ?,?)",
+            [name, email, password, role, today], (err, result) => {
                 if (err) {
                     console.error("DB Error:", err);
                     return reject(err);
@@ -118,16 +119,46 @@ exports.updatecat= (id) =>{
 
 exports.newUpdatedcat=(name,id)=>{
     return new Promise((resolve, reject) => {
-        console.log(id);
-        
-        console.log(name);
         conn.query("UPDATE categories SET name = ? WHERE id = ?",[name,id],(err, result) => {
                 conn.query("select * from categories",(err1, result1) => {
                 if (err) {
                 return reject(err1);
                 }
-                resolve(result1);
+                else{
+                    resolve(result1);
+                }
             });
             });
     });
+}
+
+//  Add book on Database
+
+exports.addBook=(title,author,publisher,isbn,category,total_copies,available_copies,status,image)=>{
+
+ return new Promise((resolve, reject) => {
+    const today = new Date().toISOString().split('T')[0];
+    console.log(title);
+        console.log(author);
+
+        console.log(publisher);
+            console.log(isbn);
+                console.log(category);
+                    console.log(total_copies);
+                    console.log(available_copies);
+                        console.log(status);
+                            console.log(image); 
+        conn.query("INSERT INTO books(title,author,publisher,isbn,category,total_copies,available_copies,status,image,created_at) VALUES (?, ?, ?, ?,?,?,?,?,?,?)",
+                                     [title,author,publisher,isbn,category,total_copies,available_copies,status,image,today], (err, result) => {
+        conn.query("select * from categories",(err1, result1) => {
+                if (err) {
+                return reject(err);
+                }
+                else{
+                    resolve(result1);
+                }
+            });
+    });
+
+});
 }
