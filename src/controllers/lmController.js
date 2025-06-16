@@ -220,5 +220,5 @@ exports.viewbook=(req,res)=> {
         else{
                 res.render("viewbook.ejs",{data:[]});
         }
-})
+});
 }
