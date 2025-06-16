@@ -1,4 +1,6 @@
-const conn = require("../../db.js");
+const conn = require("../../db.js");        //connected database
+
+//add user on database
 
 exports.addStd = (name, email, password, role) => {
     return new Promise((resolve, reject) => {
@@ -13,6 +15,9 @@ exports.addStd = (name, email, password, role) => {
             });
     });
 };
+
+ //view user or member
+
 exports.viewStudent = () => {
     return new Promise((resolve, reject) => {
         conn.query("select * from users",(err, result) => {
@@ -23,6 +28,8 @@ exports.viewStudent = () => {
             });
     });
 };
+
+// delete user and member in databese
 
 exports.deleteUser = (id) => {
     return new Promise((resolve, reject) => {
@@ -36,6 +43,8 @@ exports.deleteUser = (id) => {
             });
     });
 };
+
+//update user and member in database
 
 exports.updateUser = (id) => {
     return new Promise((resolve, reject) => {
@@ -60,6 +69,9 @@ exports.newUpdatedUser=(name,email,password,role,id)=>{
             });
     });
 }
+
+//view category
+
 exports.viewcategory=()=>{
     return new Promise((resolve, reject) => {
                 conn.query("select * from categories",(err, result) => {
@@ -70,11 +82,14 @@ exports.viewcategory=()=>{
             });
             });
 }
+
+// add on database
+
 exports.addcategory=(catname)=>{
     conn.query("insert into categories values (?,?)",['0',catname],(err,result)=>{
         if(err)
         {
-            return 1;
+            return err;
         }
         else{
             return 0;
@@ -83,7 +98,7 @@ exports.addcategory=(catname)=>{
 }
         
 
-   // Delete Category
+   // Delete Category on database
 
 exports.deletecat=(id) => {
     return new Promise((resolve,reject) => {
@@ -100,7 +115,7 @@ exports.deletecat=(id) => {
     });
 }
 
-// Update Category
+// Update Category on  database
 
 exports.updatecat= (id) =>{
     return new Promise((resolve, reject) => {
