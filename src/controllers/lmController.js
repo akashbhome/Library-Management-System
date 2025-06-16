@@ -1,13 +1,16 @@
-let service=require("../services/lmService");
-let adminModel=require("../models/lmModel.js");
-const { name } = require("ejs");
-exports.homepage=(req,res)=>{
+let service=require("../services/lmService");      //import the servises folder
+let adminModel=require("../models/lmModel.js");         //import the  model folder
+
+exports.homepage=(req,res)=>{                           //call the home page at the server will start
         res.render("home.ejs");
 }
-exports.adminLogin=(req,res)=>{
+
+
+exports.adminLogin=(req,res)=>{                                //call login page
         res.render("loginpage.ejs",{msg:""});
 }
-exports.admindash=(req,res)=>{
+
+exports.admindash=(req,res)=>{                                  //after login login successfullt then go to admindaesh board
         let {username,password}=req.body;
 
         if(username==="admin@123" &&password==="admin")
@@ -18,14 +21,20 @@ exports.admindash=(req,res)=>{
                 res.render("loginpage.ejs",{msg:"Invalid username and Password"});
         }
 }
+
+
 exports.about=(req,res)=>{
         res.render("about.ejs");
 }
 
-exports.addReg=(req,res)=>{
+
+
+exports.addReg=(req,res)=>{                                                     //member or user regitsrtion page calling
         res.render("addstud.ejs",{msg:""});
 }
-//
+
+//user or member add section
+
 exports.stdAdd = (req, res) => {
         let { name, email, password, role } = req.body;
 
@@ -38,10 +47,12 @@ exports.stdAdd = (req, res) => {
                 }
         })
         .catch((err) => {
-                console.error("Error:", err);
                 res.render("addstud.ejs", { msg: "Error occurred" });
         });
 };
+
+// update user or memeber section
+
 exports.stdUpdate = (req, res) => {
         let id = parseInt(req.query.id.trim());
         let result = adminModel.updateUser(id);
@@ -55,6 +66,7 @@ exports.stdUpdate = (req, res) => {
                 res.render("err.ejs");
         });
 };
+
 exports.newUpdatedUser=(req,res)=>{
 
         let id = parseInt(req.query.id.trim());
@@ -73,6 +85,9 @@ exports.newUpdatedUser=(req,res)=>{
                 res.render("err.ejs");
         });
 }
+
+// member and user view section
+
 exports.viewStudent=(req,res)=>{
         
         let result=adminModel.viewStudent();
@@ -88,6 +103,9 @@ exports.viewStudent=(req,res)=>{
                 res.render("err.ejs");
         });
 }
+
+//member delete section
+
 exports.deleteUser=(req,res)=>{
         let id=parseInt(req.query.id.trim());
         let result=adminModel.deleteUser(id);
@@ -103,6 +121,9 @@ exports.deleteUser=(req,res)=>{
                 res.render("err.ejs");
         });
 }
+
+// view category section
+
 exports.viewcategory=(req,res)=>{
         let result=adminModel.viewcategory();
         result.then((r)=>{
@@ -115,7 +136,7 @@ exports.viewcategory=(req,res)=>{
         })
 }
 
-//add category
+//add category section
 
 exports.addcategory=(req,res)=>{
         res.render("addcategory.ejs",{msg:""});
@@ -132,7 +153,7 @@ exports.catdataAdd=(req,res)=>{
         }
 }
 
-// delete category
+// delete category section
 
 exports.deletecategory=(req,res)=>{
         let id=parseInt(req.query.id.trim());
@@ -150,7 +171,7 @@ exports.deletecategory=(req,res)=>{
         });
 }
 
-// Update Category
+// Update Category section
 
 exports.updatecategory=(req, res) => {
         let id=parseInt(req.query.id.trim());
