@@ -284,20 +284,10 @@ exports.updateBookpage=(req,res)=>{
 exports.updateBook=(req,res)=>{
         let id=parseInt(req.query.id.trim());
         let {title,author,publisher,isbn,category,total_copies,available_copies,status}=req.body;
-        let result=adminModel.updateBook(title,author,publisher,isbn,category,total_copies,available_copies,status,id);
-        console.log("ID:", id);
-  console.log("Title:", title);
-  console.log("Author:", author);
-  console.log("Publisher:", publisher);
-  console.log("ISBN:", isbn);
-  console.log("Category:", category);
-  console.log("Total Copies:", total_copies);
-  console.log("Available Copies:", available_copies);
-  console.log("Status:", status);       
+        let result=adminModel.updateBook(title,author,publisher,isbn,category,total_copies,available_copies,status,id);      
         result.then((r)=>{
                 if(r.length>0)
                 {
-                      console.log(r);
                        res.render("viewbook.ejs",{data:r});
                 }
                 else{
@@ -331,5 +321,67 @@ exports.updateBook=(req,res)=>{
 
 exports.IssueBookPage=(req,res)=>{
         res.render("IssueBookPage.ejs");
+
+}
+exports.searchName = async (req, res) => {
+  try {
+    const { q } = req.query; // Use 'q' because your front-end is sending 'q' not 'name'
+    const result = await adminModel.searchName(q);
+    res.json(result);
+  } catch (err) {
+    console.error("Database error:", err);
+    res.status(500).json({ error: "Database error" });
+  }
+};
+
+exports.searchbook = async (req, res) => {
+  try {
+    const { q } = req.query; // Use 'q' because your front-end is sending 'q' not 'name'
+    const result = await adminModel.searchbook(q);
+    res.json(result);
+  } catch (err) {
+    console.error("Database error:", err);
+    res.status(500).json({ error: "Database error" });
+  }
+};
+
+exports.issueBook=(req,res)=>{
+        let{user_id,book_id,issue_date,return_date,status}=req.body;
+          console.log(user_id);
+             console.log(book_id);
+              console.log(issue_date);
+               console.log(return_date);
+                console.log(status);
+        let result=adminModel.issueBook(user_id,book_id,issue_date,return_date,status);      
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                      console.log(r);
+                       res.render("IssueBookPage.ejs",{msg:"Issue Book Successfully"});
+                }
+                else{
+                        res.render("IssueBookPage.ejs",{msg:""});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+
+        });
+}
+
+exports.ReturnBookPage=(req,res)=>{
+        let result=adminModel.ReturnBookPage();      
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                      console.log(r);
+                       res.render("returnbook.ejs",{data:r});
+                }
+                else{
+                        res.render("returnbook.ejs",{data:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+
+        });
 
 }
