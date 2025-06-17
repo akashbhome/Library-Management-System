@@ -147,20 +147,7 @@ exports.newUpdatedcat=(name,id)=>{
     });
 }
 
-// view book model
-exports.viewbook=() =>{
-    return new Promise((resolve,reject) => {
-        conn.query("Select * from books",(err,result) =>{
-            if(err) {
-                return reject(err);
-            }
-            else{
-                resolve (result);
-            }
-        });
 
-    });
-}
 
 
 //  Add book on Database
@@ -193,3 +180,34 @@ exports.addBook=(title,author,publisher,isbn,category,total_copies,available_cop
 
 });
 }
+
+// view book model
+
+exports.viewbook=() =>{
+    return new Promise((resolve,reject) => {
+        conn.query("Select * from books",(err,result) =>{
+            if(err) {
+                return reject(err);
+            }
+            else{
+                resolve (result);
+            }
+        });
+
+    });
+}
+
+// add student search
+
+// exports.searchAllStudent= (searchValue) => {
+//     return new Promise((res, rej) => {
+//         let value = '%' + searchValue + '%';
+//        conn.query("SELECT * FROM users WHERE name LIKE ? OR email LIKE ?", [value, value], (err, result) => {
+//                 if (err) {
+//                     rej(err);
+//                 } else {
+//                     res(result);
+//                 }
+//        });
+//     });
+// };

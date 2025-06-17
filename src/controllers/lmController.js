@@ -29,7 +29,7 @@ exports.about=(req,res)=>{
 
 
 
-exports.addReg=(req,res)=>{                                                     //member or user regitsrtion page calling
+exports.addReg=(req,res)=>{                                      //member or user regitsrtion page calling
         res.render("addstud.ejs",{msg:""});
 }
 
@@ -209,19 +209,7 @@ exports.newUpdatedcat=(req,res)=>{
         });
 }
 
-// View Book Session
-exports.viewbook=(req,res)=> {
-        console.log("hello");
-        let result=adminModel.viewbook();
-        result.then((r) => {
-        if(r.length>0){
-                res.render("viewbook.ejs",{data:r});
-        }
-        else{
-                res.render("viewbook.ejs",{data:[]});
-        }
-});
-}
+
 exports.addBookPage=(req,res)=>{
         let categories=adminModel.viewcategory();
         categories.then((r)=>{
@@ -245,3 +233,34 @@ exports.addBook=(req,res)=>{
         });
 
 }
+
+// View Book Session
+exports.viewbook=(req,res)=> {
+        console.log("hello");
+        let result=adminModel.viewbook();
+        result.then((r) => {
+        if(r.length>0){
+                res.render("viewbook.ejs",{data:r});
+        }
+        else{
+                res.render("viewbook.ejs",{data:[]});
+        }
+});
+}
+
+/// add student search operation
+
+// exports.searchStud = async (req, res) => {
+//     try {
+//         const searchValue = req.query.sd;
+//         console.log("Received search value:", searchValue); // ADD THIS
+
+//         const stud = await adminModel.searchAllStudent();
+//         console.log("Search result:", stud); //  ADD THIS
+
+//         res.json(stud);  // Send JSON for AJAX, don't render EJS here
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json({ error: "Something went wrong" });
+//     }
+// };
