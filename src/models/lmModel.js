@@ -232,7 +232,7 @@ exports.viewbook=() =>{
 
 // add student search
 
-// exports.searchAllStudent= (searchValue) => {
+// exports.searchAllStudent = (searchValue) => {
 //     return new Promise((res, rej) => {
 //         let value = '%' + searchValue + '%';
 //        conn.query("SELECT * FROM users WHERE name LIKE ? OR email LIKE ?", [value, value], (err, result) => {
@@ -242,5 +242,5 @@ exports.viewbook=() =>{
 //                     res(result);
 //                 }
 //        });
-//     });
+//    });
 // };

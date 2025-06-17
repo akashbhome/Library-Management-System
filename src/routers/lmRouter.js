@@ -19,7 +19,7 @@ router.get("/deleteUser",controller.deleteUser);
 //router.get("/searchStudent",controller.searchStud);
 
 
-// Category 
+// Category
 router.get("/addcategory",controller.addcategory);
 router.get("/viewcategory",controller.viewcategory);
 router.post("/catdataAdd",controller.catdataAdd)
