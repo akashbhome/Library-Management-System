@@ -226,3 +226,55 @@ exports.updateBook=(title,author,publisher,isbn,category,total_copies,available_
     });    
 
 }
+exports.searchName = (name) => {
+  return new Promise((resolve, reject) => {
+    const searchPattern = `%${name}%`;
+    conn.query("SELECT * FROM users WHERE name LIKE ?", [searchPattern], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+exports.searchbook = (category) => {
+  return new Promise((resolve, reject) => {
+    const searchPattern = `${category}%`;
+    conn.query("SELECT * FROM books WHERE category LIKE ?", [searchPattern], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+exports.issueBook=(user_id,book_id,issue_date,return_date,status)=>{
+    return new Promise((resolve, reject) => {
+          
+             conn.query("insert into issue_details values ('0',?,?,?,?,?)",[book_id,user_id,issue_date,return_date,status],(err,result)=>{  
+                if (err) {
+                return reject(err);
+                }
+                else{
+                    resolve(result);
+                }
+            });
+   
+    })
+}
+
+    
+exports.ReturnBookPage=()=>{
+     return new Promise((resolve, reject) => {
+
+             conn.query("SELECT issue_details.id,users.name as name,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id",
+                (err,result)=>{  
+                if (err) {
+                return reject(err);
+                }
+                else{
+                    resolve(result);
+                }
+            });
+   
+    })
+
+}

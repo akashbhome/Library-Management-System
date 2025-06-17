@@ -26,4 +26,10 @@ router.get("/deleteBook",controller.deleteBook);
 router.get("/updateBookpage",controller.updateBookpage);
 router.post("/updateBook",upload.single('image'),controller.updateBook);
 router.get("/IssueBookPage",controller.IssueBookPage);
+
+router.get("/admin/api/users/search",controller.searchName);
+router.get("/admin/api/category/search",controller.searchbook);
+router.post("/issueBook",controller.issueBook);
+
+router.get("/ReturnBookPage",controller.ReturnBookPage);
 module.exports=router;

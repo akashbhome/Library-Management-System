@@ -1,33 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Issue Book Page</title>
     <link rel="stylesheet" href="/css/navSide.css">
+    <style>
+
+    </style>
 </head>
+
 <body>
-     <%- include("nav.ejs") %>
+    <%- include("nav.ejs") %>
 
-    <div class="main w-100">
-        <div class="side">
-            <%- include("aside.ejs") %>
-        </div>
-        <div class="rightSide">
-            <div class="updateStd">
-                <h1>Update User</h1>
-                <form action="" method="POST">
-                        <input type="text">
-                        <input type="text" name="" id="">
-                        <input type="text" name="" id="">
-                        <input type="text">
-                        <input type="text" name="" id="">
-
-                    <input type="submit" value="Update">
-                </form>
+        <div class="main w-100">
+            <div class="side">
+                <%- include("aside.ejs") %>
             </div>
-        </div>
-    </div>
+            <div class="rigth">
+                <div class="container d-flex justify-content-center align-items-center min-vh-100">
+                    <div class="card shadow-lg p-4 w-100" style="max-width: 600px;">
+                        <h3 class="text-center mb-4">Issue Book Form</h3>
+
+                        <form action="/issueBook" method="POST">
+                            <div class="mb-3">
+                                <label for="userSearch" class="form-label">Search User (Name or Email)</label>
+                                <input type="text" class="form-control" id="userSearch" autocomplete="off" required>
+                                <input type="hidden" name="user_id" id="user_id" required>
+                                <div id="userSuggestions" class="list-group"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categorySearch" class="form-label">Search category</label>
+                                <input type="text" class="form-control" id="categorySearch" autocomplete="off" required>
+                                <input type="hidden" name="book_id" id="book_id" required>
+                                <div id="categorySuggestions" class="list-group"></div>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="issue_date" class="form-label">Issue Date</label>
+                                <input type="date" class="form-control" id="issue_date" name="issue_date" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="return_date" class="form-label">Return Date</label>
+                                <input type="date" class="form-control" id="return_date" name="return_date" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="sataus" class="form-label">Status</label>
+                                <select class="form-select" aria-label="Large select example" id="sataus" name="status">
+                                    <option selected>Open this select menu</option>
+                                    <option value="issued">issued</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+
+                //search user by it's name
+                const userSearch = document.getElementById('userSearch');
+                const userSuggestions = document.getElementById('userSuggestions');
+                const userIdInput = document.getElementById('user_id');
+                userSearch.addEventListener('input', async function () {
+                    const q = this.value.trim();
+                    if (q.length < 2) {
+                        userSuggestions.innerHTML = '';
+                        return;
+                    }
+                    const res = await fetch(`/admin/api/users/search?q=${encodeURIComponent(q)}`);
+                    const users = await res.json();
+                    userSuggestions.innerHTML = '';
+                    users.forEach(user => {
+                        const item = document.createElement('button');
+                        item.type = 'button';
+                        item.className = 'list-group-item list-group-item-action';
+                        item.textContent = user.name + ' (' + user.email + ')';
+                        item.onclick = () => {
+                            userSearch.value = user.name + ' (' + user.email + ')';
+                            userIdInput.value = user.id;
+                            userSuggestions.innerHTML = '';
+                        };
+                        userSuggestions.appendChild(item);
+                    });
+                });
+                // Category to books AJAX
+                const categorySearch = document.getElementById('categorySearch');
+                const categorySuggestions = document.getElementById('categorySuggestions');
+                const categoryIdInput = document.getElementById('book_id');
+
+                categorySearch.addEventListener('input', async function () {
+                    const q = this.value.trim();
+
+                    //Clear old search results every time user types
+                    categorySuggestions.innerHTML = '';
+
+                    if (q.length < 2) return;
+                    const res = await fetch(`/admin/api/category/search?q=${encodeURIComponent(q)}`);
+                    const categories = await res.json();
+
+                    if (Array.isArray(categories) && categories.length > 0) {
+                        categories.forEach(category => {
+                            const item = document.createElement('button');
+                            item.type = 'button';
+                            item.className = 'list-group-item list-group-item-action';
+                            item.textContent = category.title;
+
+                            item.onclick = () => {
+                                categorySearch.value = category.title;
+                                categoryIdInput.value = category.id;
+                                categorySuggestions.innerHTML = '';
+                            };
+
+                            categorySuggestions.appendChild(item);
+                        });
+                    }
+                });
+
+                //issue and return date
+                document.getElementById("issue_date").addEventListener("change", function () {
+                    const issueDate = new Date(this.value);
+
+                    if (!isNaN(issueDate)) {
+                        issueDate.setDate(issueDate.getDate() + 7);            // Add 7 days
+
+                        const yyyy = issueDate.getFullYear();
+                        const mm = String(issueDate.getMonth() + 1).padStart(2, '0');
+                        const dd = String(issueDate.getDate()).padStart(2, '0');
+
+                        const returnDateFormatted = `${yyyy}-${mm}-${dd}`; // Format for input[type="date"]
+                        document.getElementById("return_date").value = returnDateFormatted;
+                    }
+                });
+
+
+            </script>
+
 
 </body>
+
 </html>
