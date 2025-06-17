@@ -1,16 +1,22 @@
 
- body{
-        height: 100vh;
-    }
-    .main{
-            width:100%;
-            height: 100%;
-            display:flex;
-    }
-    .side{
-        width:25%;
-        height: 100%;
-    }
-    .rigth{
-        width:75%;
-    }
+ .UD_Btn{
+    width:80px;
+    height: 30px;
+    padding: 1px 14px;
+    align-items: center;
+    margin-left:20px;
+    font-weight: bold;
+    border-radius: 10px;
+
+}
+ .UD_Btn a{
+    text-decoration: none;
+    color:black;
+}
+
+ .UD_upd{
+    background-color:rgb(75, 232, 125);
+}
+.UD_del{
+    background-color:rgb(216, 95, 91);
+}

@@ -12,22 +12,43 @@
         <div class="side">
             <%-include("aside.ejs")%>
         </div>
-        <div class="rigth">
+        <div class="search">
+            <input type="search" placeholder="Search Books">
+            <div class="rigth">
         
         <% if (data.length == 0) { %>
-    <label for="">NO data Available</label>
+    <label for=""><h1>Data is Not Available 😒</h1></label>
     <% } else {
                 data.forEach((item) => {
         %>
        <div class="books">
-           <img src="<%=item.image%>" alt="NO image found">
-           <label for="">Title : <%=item.title%></label>
+           <center><img src="<%=item.image%>" alt="NO image found"></center><br>
+          <div class="infoBook">
+               <div>
+                <label for=""><b>Title : </b> <%=item.title%></label><br>
+                <label for=""><b>Author : </b> <%=item.author%></label><br>
+                <label for=""><b>Publisher : </b> <%=item.publisher%></label><br>
+                <label for=""><b>Category : </b> <%=item.category%></label><br> 
+                 
+               </div>
+               <div>
+                <label for=""><b>ISBN : </b><%=item.isbn%></label><br>
+                <label for=""><b>Status : </b> <%=item.status%></label><br>
+                <label for=""><b>Total Copies : </b> <%=item.total_copies%></label><br>
+                <label for=""><b>Available Copies : </b> <%=item.available_copies%></label><br>   
+               </div>
+          </div>
+          <div class="viewBookBtn">
+            <button class="UD_Btn UD_del"><a href="/deleteBook?id=<%=item.id%>">Delete</a></button>
+            <button class="UD_Btn UD_upd"><a href="/updateBookpage?id=<%=item.id%>">Update</a></button> 
+          </div>
 
        </div>
 
     <%})}%>
 
     </div>
+        </div>
 </div>
 </div>
 </body>

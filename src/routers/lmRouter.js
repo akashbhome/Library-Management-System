@@ -22,4 +22,8 @@ router.post("/updatecat",controller.newUpdatedcat);
 router.get("/viewbook",controller.viewbook);
 router.get("/addBookPage",controller.addBookPage);
 router.post("/addBook",upload.single('image'),controller.addBook);
+router.get("/deleteBook",controller.deleteBook);
+router.get("/updateBookpage",controller.updateBookpage);
+router.post("/updateBook",upload.single('image'),controller.updateBook);
+router.get("/IssueBookPage",controller.IssueBookPage);
 module.exports=router;

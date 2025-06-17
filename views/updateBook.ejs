@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Books</title>
+    <link rel="stylesheet" href="/css/addbooks.css">
+</head>
+<body>
+      <%-include("nav.ejs")%>
+    <div class="main w-100 ">
+        <div class="side">
+            <%-include("aside.ejs")%>
+        </div>
+        <div class="rigth">
+        <div class="addBook">
+            <h1>Update Book</h1>
+
+            <form action="/updateBook?id=<%=data.id%>" method="POST" enctype="multipart/form-data">
+                
+            <input type="text" id="title" value="<%=data.title%>" name="title" placeholder="Add title">
+            <input type="text" id="author" value="<%=data.author%>" name="author" placeholder="Add Author">
+            <input type="text" id="publisher" value="<%=data.publisher%>" name="publisher" placeholder="Add publisher">
+            <input type="text" id="isbn" value="<%=data.isbn%>" name="isbn" placeholder="isbn">
+            <select name="category" id="" value="">
+                <option value="<%=data.category%>"><%=data.category%></option>
+            </select>
+            <input type="text" id="total_copies" value="<%=data.total_copies%>" name="total_copies" placeholder="Total Copies">
+            <input type="text" id="Available_coplies" value="<%=data.available_copies%>" name="available_copies" placeholder="Available_coplies">
+                <select name="status" id="" value="">
+                    <option value="<%=data.status%>"><%=data.status%></option>
+                    <option value="available">available</option>
+                    <option value="unavailable">unavailable</option>
+                </select>
+            <input type="hidden" name="image" value="<%=data.image%>"> 
+
+            <input type="submit" value="Update"><br>
+            </form>
+    </div>
+</div>
+    
+</div>
+</body>
+</html>
