@@ -234,33 +234,68 @@ exports.addBook=(req,res)=>{
 
 }
 
-// View Book Session
-exports.viewbook=(req,res)=> {
-        console.log("hello");
-        let result=adminModel.viewbook();
-        result.then((r) => {
-        if(r.length>0){
-                res.render("viewbook.ejs",{data:r});
-        }
-        else{
-                res.render("viewbook.ejs",{data:[]});
-        }
-});
+exports.deleteBook=(req,res)=>{
+       let id=parseInt(req.query.id.trim());
+        let result=adminModel.deleteBook(id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                        res.render("viewbook.ejs",{data:r});
+                }
+                else{
+                        res.render("viewbook.ejs",{data:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
 }
 
-/// add student search operation
+exports.updateBookpage=(req,res)=>{
+        let id=parseInt(req.query.id.trim());
+         let result=adminModel.updateBookpage(id);
+        result.then((r)=>{
+                if(r.length>0)
+                {
 
-// exports.searchStud = async (req, res) => {
-//     try {
-//         const searchValue = req.query.sd;
-//         console.log("Received search value:", searchValue); // ADD THIS
+                        res.render("updateBook.ejs",{data:r[0]});
+                }
+                else{
+                        res.render("updateBook.ejs",{data:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
+        });
+       
+}
+exports.updateBook=(req,res)=>{
+        let id=parseInt(req.query.id.trim());
+        let {title,author,publisher,isbn,category,total_copies,available_copies,status}=req.body;
+        let result=adminModel.updateBook(title,author,publisher,isbn,category,total_copies,available_copies,status,id);
+        console.log("ID:", id);
+  console.log("Title:", title);
+  console.log("Author:", author);
+  console.log("Publisher:", publisher);
+  console.log("ISBN:", isbn);
+  console.log("Category:", category);
+  console.log("Total Copies:", total_copies);
+  console.log("Available Copies:", available_copies);
+  console.log("Status:", status);       
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                      console.log(r);
+                       res.render("viewbook.ejs",{data:r});
+                }
+                else{
+                        res.render("viewbook.ejs",{data:[]});
+                }
+        }).catch((err)=>{
+                res.render("err.ejs");
 
-//         const stud = await adminModel.searchAllStudent();
-//         console.log("Search result:", stud); //  ADD THIS
+        });
 
-//         res.json(stud);  // Send JSON for AJAX, don't render EJS here
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Something went wrong" });
-//     }
-// };
+}
+exports.IssueBookPage=(req,res)=>{
+        res.render("IssueBookPage.ejs");
+
+}

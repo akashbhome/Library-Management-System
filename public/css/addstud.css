@@ -1,18 +1,4 @@
- body{
-        height: 100vh;
-    }
-    .main{
-            width:100%;
-            height: 100%;
-            display:flex;
-    }
-    .side{
-        width:25%;
-        height: 100%;
-    }
-    .rigth{
-        width:75%;
-    }
+
     .addStd{
         width:60%;
         margin: 100px auto;

@@ -2,7 +2,9 @@
     display:flex;
     justify-content: space-between;
     padding: 13px 250px 13px 70px;
-    background-color: rgba(237, 143, 143, 0.7);
+    background-color: rgba(33, 32, 32, 0.9);
+    color:white;
+    width: 100%;
 
 }
 .nav ul{
@@ -29,7 +31,7 @@
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
-    color:black;
+    color:rgb(247, 245, 245);
 }
 .nav ul a:hover{
     color:rgb(245, 7, 7);

@@ -156,16 +156,6 @@ exports.addBook=(title,author,publisher,isbn,category,total_copies,available_cop
 
  return new Promise((resolve, reject) => {
     const today = new Date().toISOString().split('T')[0];
-    console.log(title);
-        console.log(author);
-
-        console.log(publisher);
-            console.log(isbn);
-                console.log(category);
-                    console.log(total_copies);
-                    console.log(available_copies);
-                        console.log(status);
-                            console.log(image); 
         conn.query("INSERT INTO books(title,author,publisher,isbn,category,total_copies,available_copies,status,image,created_at) VALUES (?, ?, ?, ?,?,?,?,?,?,?)",
                                     [title,author,publisher,isbn,category,total_copies,available_copies,status,image,today], (err, result) => {
         conn.query("select * from categories",(err1, result1) => {
@@ -179,6 +169,49 @@ exports.addBook=(title,author,publisher,isbn,category,total_copies,available_cop
     });
 
 });
+}
+// Delete Books
+exports.deleteBook=(id) => {
+    return new Promise((resolve,reject) => {
+        conn.query("delete from books where id=?",[id],(err,result) => {
+            conn.query("select * from books ",(err1,result1)=>{
+                if (err) {
+                    return reject(err1);
+                }
+                else{
+                    resolve(result1);
+                }
+            });
+        });
+    });
+}
+exports.updateBookpage=(id)=>{
+     return new Promise((resolve,reject) => {
+            conn.query("select * from books where id=? ",[id],(err,result)=>{
+                if (err) {
+                    return reject(err);
+                }
+                else{
+                    resolve(result);
+                }
+            });
+        });
+    
+}
+exports.updateBook=(title,author,publisher,isbn,category,total_copies,available_copies,status,id)=>{
+    return new Promise((resolve, reject) => {
+        conn.query("UPDATE books SET title = ?,author=?,publisher=?,isbn=?,category=?,total_copies=?,available_copies=?,status=? WHERE id = ?",[title,author,publisher,isbn,category,total_copies,available_copies,status,id],(err, result) => {
+                conn.query("select * from books",(err1, result1) => {
+                if (err) {
+                return reject(err1);
+                }
+                else{
+                    resolve(result1);
+                }
+            });
+            });
+    });    
+
 }
 
 // view book model
