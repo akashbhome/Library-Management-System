@@ -29,7 +29,7 @@ exports.about=(req,res)=>{
 
 
 
-exports.addReg=(req,res)=>{                                                     //member or user regitsrtion page calling
+exports.addReg=(req,res)=>{                                      //member or user regitsrtion page calling
         res.render("addstud.ejs",{msg:""});
 }
 
@@ -208,7 +208,6 @@ exports.newUpdatedcat=(req,res)=>{
 
         });
 }
-
 // View Book Session
 exports.viewbook=(req,res)=> {
         console.log("hello");
@@ -222,6 +221,7 @@ exports.viewbook=(req,res)=> {
         }
 });
 }
+
 exports.addBookPage=(req,res)=>{
         let categories=adminModel.viewcategory();
         categories.then((r)=>{
@@ -245,6 +245,8 @@ exports.addBook=(req,res)=>{
         });
 
 }
+
+
 
 exports.deleteBook=(req,res)=>{
        let id=parseInt(req.query.id.trim());
@@ -297,6 +299,26 @@ exports.updateBook=(req,res)=>{
         });
 
 }
+// search student
+
+// exports.searchStud = async (req, res) => {
+//         alert("hello" +str);
+//     try {
+
+//         const searchValue = req.query.sd.trim();
+//         console.log("Received search value:", searchValue);
+
+//         const stud = await adminModel.searchAllStudent(searchValue);  // Await added
+//         console.log("Search result:", stud);
+
+//         res.json(stud);
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json({ error: "Something went wrong" });
+//     }
+// };
+
+
 exports.IssueBookPage=(req,res)=>{
         res.render("IssueBookPage.ejs");
 
