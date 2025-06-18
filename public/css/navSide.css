@@ -15,3 +15,11 @@
         width:80%;
         
     }
+
+    .rigth table td i{
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    .rigth table td i:hover{
+        color:red;
+    }
