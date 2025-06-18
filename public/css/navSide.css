@@ -18,3 +18,11 @@
         margin: auto;
         text-align: center;
     }
+
+    .rigth table td i{
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    .rigth table td i:hover{
+        color:red;
+    }

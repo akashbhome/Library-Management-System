@@ -169,6 +169,23 @@ exports.addBook=(title,author,publisher,isbn,category,total_copies,available_cop
 
 });
 }
+
+// view book model
+
+exports.viewbook=() =>{
+    return new Promise((resolve,reject) => {
+        conn.query("Select * from books",(err,result) =>{
+            if(err) {
+                return reject(err);
+            }
+            else{
+                resolve (result);
+            }
+        });
+
+    });
+}
+
 // Delete Books
 exports.deleteBook=(id) => {
     return new Promise((resolve,reject) => {
@@ -265,21 +282,7 @@ exports.ReturnBookPage=()=>{
 
 }
 
-// view book model
 
-exports.viewbook=() =>{
-    return new Promise((resolve,reject) => {
-        conn.query("Select * from books",(err,result) =>{
-            if(err) {
-                return reject(err);
-            }
-            else{
-                resolve (result);
-            }
-        });
-
-    });
-}
 
 // add student search
 
