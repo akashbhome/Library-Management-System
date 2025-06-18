@@ -267,9 +267,9 @@ exports.issueBook=(user_id,book_id,issue_date,return_date,status)=>{
 
     
 exports.ReturnBookPage=()=>{
-     return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
-             conn.query("SELECT issue_details.id,users.name as name,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id",
+            conn.query("SELECT issue_details.id,users.name as name,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id",
                 (err,result)=>{  
                 if (err) {
                 return reject(err);
@@ -278,7 +278,6 @@ exports.ReturnBookPage=()=>{
                     resolve(result);
                 }
             });
-   
     })
 
 }
