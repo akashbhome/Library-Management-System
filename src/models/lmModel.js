@@ -4,9 +4,8 @@ const conn = require("../../db.js");        //connected database
 
 exports.addStd = (name, email, password, role) => {
     return new Promise((resolve, reject) => {
-    const today = new Date().toISOString().split('T')[0];
-        conn.query("INSERT INTO users (name, email, password, role,created_at) VALUES (?, ?, ?, ?,?)",
-            [name, email, password, role, today], (err, result) => {
+        conn.query("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
+            [name, email, password, role], (err, result) => {
                 if (err) {
                     console.error("DB Error:", err);
                     return reject(err);
@@ -296,3 +295,21 @@ exports.viewbook=() =>{
 //        });
 //    });
 // };
+
+
+//User Login 
+exports.userlogin = (username, password) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      "SELECT * FROM users WHERE email = ? AND password = ?",
+      [username, password],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        }
+         else {
+          resolve(result);
+        }
+      });
+  });
+};

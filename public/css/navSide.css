@@ -13,5 +13,8 @@
     }
     .rigth{
         width:80%;
-        
+    }
+    .rigth table{
+        margin: auto;
+        text-align: center;
     }
