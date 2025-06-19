@@ -15,18 +15,22 @@
   </style>
 </head>
 <body>
-  <%- include("adminNav.ejs") %>
-  <div class="main w-100">
-    <div class="side">
+   <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+ 
+  <div class="row g-0">
+    
+   
+    <div class="col-2 p-0">
       <%- include("aside.ejs") %>
     </div>
-    <div class="rigth">
-      <div class="container mt-4">
-        <div class="mb-3">
+    <div class="col-8">
+   <div class="container mt-4 w-100 pl-5">
+        <div class="mb-3 w-25 mx-5">
           <input type="text" id="searchInput" class="form-control" placeholder="Search by Name..." />
         </div>
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered mx-5 mt-5">
           <thead>
             <tr>
               <th>Sr. No</th>
@@ -56,7 +60,9 @@
         <div class="text-center" id="paginationContainer"></div>
       </div>
     </div>
-  </div>
+</div>
+
+        </div>
 
   <script>
     const rowsPerPage = 5;

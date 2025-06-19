@@ -12,40 +12,37 @@
     <aside class="w-100 h-100">
           <div class="accordion mt-5" id="dashboardAccordion">
                     <div class="mt-3 mb-5">
-                        <h4><a href="/admin" class=" text-dark">Dashboard</a></h4>
+                        <h3><a href="" class=" text-dark">User</a></h3>
                     </div>
-                    <!-- Student Section -->
+                    <!--Profile-->
                    <div class="accordion-item mt-3 bg-dark-subtle text-white">
                         <h2 class="accordion-header " id="headingStudent">
                             <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseStudent" aria-expanded="false" aria-controls="collapseStudent">
-                                <i class="fas fa-user-graduate"></i>&nbsp;&nbsp;Student
+                                <i class="fas fa-user-graduate"></i>&nbsp;&nbsp;Profile
                             </button>
                         </h2>
                         <div id="collapseStudent" class="accordion-collapse collapse" aria-labelledby="headingStudent"
                             data-bs-parent="#dashboardAccordion">
                             <div class="accordion-body">
-                                <a href="/addReg" class="btn btn-outline-primary w-100 mb-2"><i class="fa fa-address-book" aria-hidden="true"></i>
-                                    Add Student</a>
-                                <a href="/view" class="btn btn-outline-primary w-100 "><i class="fa fa-address-card-o" aria-hidden="true"></i> View Student</a>
+                                <a href="" class="btn btn-outline-primary w-100 "><i class="fa fa-address-card-o" aria-hidden="true"></i> View Profile</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Category Section -->
+                    <!-- books View -->
                     <div class="accordion-item mt-3 bg-dark-subtle text-white">
                         <h2 class="accordion-header" id="headingCategory">
                             <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseCategory" aria-expanded="false"
                                 aria-controls="collapseCategory">
-                                <i class="fas fa-tags"></i>&nbsp;&nbsp;Category
+                                <i class="fas fa-tags"></i>&nbsp;&nbsp;View Books
                             </button>
                         </h2>
                         <div id="collapseCategory" class="accordion-collapse collapse" aria-labelledby="headingCategory"
                             data-bs-parent="#dashboardAccordion">
                             <div class="accordion-body">
-                                <a href="/addcategory" class="btn btn-outline-success w-100 mb-2"><i class="fas fa-folder-plus"></i> Add Category</a>
-                                <a href="/viewcategory" class="btn btn-outline-success w-100"><i class="fas fa-eye"></i> View Category</a>
+                                <a href="/addcategory" class="btn btn-outline-success w-100 mb-2"><i class="fas fa-folder-plus"></i> View Book</a>
                             </div>
                         </div>
                     </div>
@@ -55,14 +52,13 @@
                         <h2 class="accordion-header" id="headingBooks">
                             <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseBooks" aria-expanded="false" aria-controls="collapseBooks">
-                                <i class="fas fa-book"></i>&nbsp;&nbsp;Books
+                                <i class="fas fa-book"></i>&nbsp;&nbsp;Isse Book
                             </button>
                         </h2>
                         <div id="collapseBooks" class="accordion-collapse collapse" aria-labelledby="headingBooks"
                             data-bs-parent="#dashboardAccordion">
                             <div class="accordion-body">
-                                <a href="/addBookPage" class="btn btn-outline-danger w-100 mb-2"> <i class="fas fa-folder-plus"></i> Add Books</a>
-                                <a href="/viewbook" class="btn btn-outline-danger w-100"><i class="fas fa-eye"></i> View Books</a>
+                                <a href="/addBookPage" class="btn btn-outline-danger w-100 mb-2"> <i class="fas fa-folder-plus"></i> Issue Books</a>
                             </div>
                         </div>
                     </div>
@@ -72,33 +68,17 @@
                         <h2 class="accordion-header" id="headingIssueBook">
                             <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapsIssuseBook" aria-expanded="false" aria-controls="collapsIssuseBook">
-                                <i class="fas fa-hand-holding"></i> <i class="fas fa-book"></i>&nbsp;&nbsp;Issue Book
+                                <i class="fas fa-hand-holding"></i> <i class="fas fa-book"></i>&nbsp;&nbsp;History
                             </button>
                         </h2>
                         <div id="collapsIssuseBook" class="accordion-collapse collapse" aria-labelledby="headingIssueBook"
                             data-bs-parent="#dashboardAccordion">
                             <div class="accordion-body">
-                                <a href="/IssueBookPage" class="btn btn-outline-dark w-100 mb-2">Issue Book</a>
+                                <a href="/IssueBookPage" class="btn btn-outline-dark w-100 mb-2">History</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Return Book Section -->
-                     <div class="accordion-item mt-3 bg-dark-subtle text-white">
-                        <h2 class="accordion-header" id="headingReturnBook">
-                            <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapsReturnBook" aria-expanded="false" aria-controls="collapsReturnBook">
-                                Return Book
-                            </button>
-                        </h2>
-                        <div id="collapsReturnBook" class="accordion-collapse collapse" aria-labelledby="headingReturnBook"
-                            data-bs-parent="#dashboardAccordion">
-                            <div class="accordion-body">
-                                <a href="/ReturnBookPage" class="btn btn-outline-info w-100 mb-2">Return Book</a>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
         </aside>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         crossorigin="anonymous"></script>

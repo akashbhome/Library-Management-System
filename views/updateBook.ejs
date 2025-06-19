@@ -8,38 +8,74 @@
       <link rel="stylesheet" href="/css/navSide.css">
 </head>
 <body>
-      <%-include("nav.ejs")%>
+      <%-include("adminNav.ejs")%>
     <div class="main w-100 ">
         <div class="side">
             <%-include("aside.ejs")%>
         </div>
-        <div class="rigth">
-        <div class="addBook">
-            <h1>Update Book</h1>
+      <div class="container mt-5 w-50">
+  <div class="card shadow p-4">
+    <h2 class="mb-4 text-center">Update Book</h2>
 
-            <form action="/updateBook?id=<%=data.id%>" method="POST" enctype="multipart/form-data">
-                
-            <input type="text" id="title" value="<%=data.title%>" name="title" placeholder="Add title">
-            <input type="text" id="author" value="<%=data.author%>" name="author" placeholder="Add Author">
-            <input type="text" id="publisher" value="<%=data.publisher%>" name="publisher" placeholder="Add publisher">
-            <input type="text" id="isbn" value="<%=data.isbn%>" name="isbn" placeholder="isbn">
-            <select name="category" id="" value="">
-                <option value="<%=data.category%>"><%=data.category%></option>
-            </select>
-            <input type="text" id="total_copies" value="<%=data.total_copies%>" name="total_copies" placeholder="Total Copies">
-            <input type="text" id="Available_coplies" value="<%=data.available_copies%>" name="available_copies" placeholder="Available_coplies">
-                <select name="status" id="" value="">
-                    <option value="<%=data.status%>"><%=data.status%></option>
-                    <option value="available">available</option>
-                    <option value="unavailable">unavailable</option>
-                </select>
-            <input type="hidden" name="image" value="<%=data.image%>"> 
+    <form action="/updateBook?id=<%= data.id %>" method="POST" enctype="multipart/form-data">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" name="title" value="<%= data.title %>" class="form-control" placeholder="Add title" required>
+        </div>
 
-            <input type="submit" value="Update"><br>
-            </form>
-    </div>
+        <div class="col-md-6">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" id="author" name="author" value="<%= data.author %>" class="form-control" placeholder="Add Author" required>
+        </div>
+
+        <div class="col-md-6">
+          <label for="publisher" class="form-label">Publisher</label>
+          <input type="text" id="publisher" name="publisher" value="<%= data.publisher %>" class="form-control" placeholder="Add Publisher">
+        </div>
+
+        <div class="col-md-6">
+          <label for="isbn" class="form-label">ISBN</label>
+          <input type="text" id="isbn" name="isbn" value="<%= data.isbn %>" class="form-control" placeholder="ISBN">
+        </div>
+
+        <div class="col-md-6">
+          <label for="category" class="form-label">Category</label>
+          <select name="category" id="category" class="form-select" required>
+            <option value="<%= data.category %>"><%= data.category %></option>
+            <!-- Optionally, dynamically populate more categories if needed -->
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="total_copies" class="form-label">Total Copies</label>
+          <input type="number" id="total_copies" name="total_copies" value="<%= data.total_copies %>" class="form-control" placeholder="Total Copies">
+        </div>
+
+        <div class="col-md-6">
+          <label for="available_copies" class="form-label">Available Copies</label>
+          <input type="number" id="available_copies" name="available_copies" value="<%= data.available_copies %>" class="form-control" placeholder="Available Copies">
+        </div>
+
+        <div class="col-md-6">
+          <label for="status" class="form-label">Status</label>
+          <select name="status" id="status" class="form-select">
+            <option value="<%= data.status %>"><%= data.status %></option>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+        </div>
+
+        <input type="hidden" name="image" value="<%= data.image %>">
+
+        <div class="col-12 text-center mt-3">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
-    
+
 </div>
 </body>
 </html>

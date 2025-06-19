@@ -10,6 +10,10 @@ exports.adminLogin=(req,res)=>{                                //call login page
         res.render("loginpage.ejs",{msg:""});
 }
 
+exports.admin=(req,res)=>{
+        res.render("Admindashboard.ejs");
+}
+
 exports.admindash=(req,res)=>{                                  //after login login successfullt then go to admindaesh board
         let {username,password}=req.body;
 

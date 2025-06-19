@@ -8,43 +8,94 @@
         <link rel="stylesheet" href="/css/navSide.css">
 </head>
 <body>
-      <%-include("adminNav.ejs")%>
-    <div class="main w-100 ">
-        <div class="side">
-            <%-include("aside.ejs")%>
-        </div>
-        <div class="rigth">
-        <div class="addBook">
-            <h1>Add Books</h1>
-            <form action="/addBook" method="POST" enctype="multipart/form-data">
-            <input type="text" id="title" value="" name="title" placeholder="Add title">
-            <input type="text" id="author" value="" name="author" placeholder="Add Author">
-            <input type="text" id="publisher" value="" name="publisher" placeholder="Add publisher">
-            <input type="text" id="isbn" value="" name="isbn" placeholder="isbn">
-            <select name="category" id="">
-                <option value="">Select Category</option>
-                 <% if (cat.length == 0) { %>
-                    <option value="">NO data Available</option>
-                <% } else {
-                         cat.forEach((item) => {
-                     %>
-                            <option value="<%=item.name%>"><%=item.name%></option>
-                    <%})}%>
-            </select>
-            <input type="text" id="total_copies" value="" name="total_copies" placeholder="Total Copies">
-            <input type="text" id="Available_coplies" value="" name="available_copies" placeholder="Available_coplies">
-                <select name="status" id="">
-                    <option value="available">available</option>
-                    <option value="unavailable">unavailable</option>
-                </select>
-                <input type="file" name="image"> 
-
-            <input type="submit" value="submit" placeholder="Add Category" ><br>
-            <%-msg%>
-            </form>
-    </div>
-</div>
+    <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+  <div class="row g-0">
     
+    <div class="col-2 p-0">
+      <%- include("aside.ejs") %>
+    </div>
+    <div class="col-8">
+
+<div class="container mt-4 w-75">
+  <div class="card shadow p-4">
+    <h2 class="mb-4 text-center">Add Books</h2>
+    <form action="/addBook" method="POST" enctype="multipart/form-data">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" name="title" class="form-control" placeholder="Add title" required>
+        </div>
+
+        <div class="col-md-6">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" id="author" name="author" class="form-control" placeholder="Add Author" required>
+        </div>
+
+        <div class="col-md-6">
+          <label for="publisher" class="form-label">Publisher</label>
+          <input type="text" id="publisher" name="publisher" class="form-control" placeholder="Add Publisher">
+        </div>
+
+        <div class="col-md-6">
+          <label for="isbn" class="form-label">ISBN</label>
+          <input type="text" id="isbn" name="isbn" class="form-control" placeholder="ISBN">
+        </div>
+
+        <div class="col-md-6">
+          <label for="category" class="form-label">Category</label>
+          <select name="category" id="category" class="form-select" required>
+            <option value="">Select Category</option>
+            <% if (cat.length === 0) { %>
+              <option value="">No data available</option>
+            <% } else {
+              cat.forEach((item) => { %>
+                <option value="<%= item.name %>"><%= item.name %></option>
+            <% }) } %>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="total_copies" class="form-label">Total Copies</label>
+          <input type="number" id="total_copies" name="total_copies" class="form-control" placeholder="Total Copies">
+        </div>
+
+        <div class="col-md-6">
+          <label for="available_copies" class="form-label">Available Copies</label>
+          <input type="number" id="available_copies" name="available_copies" class="form-control" placeholder="Available Copies">
+        </div>
+
+        <div class="col-md-6">
+          <label for="status" class="form-label">Status</label>
+          <select name="status" id="status" class="form-select">
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label for="image" class="form-label">Book Image</label>
+          <input type="file" name="image" class="form-control">
+        </div>
+
+        <div class="col-12 text-center mt-3">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        <% if (msg) { %>
+          <div class="alert alert-info text-center mt-3" role="alert">
+            <%- msg %>
+          </div>
+        <% } %>
+      </div>
+    </form>
+  </div>
 </div>
+
+        </div>
+</div>
+</div>
+
+
 </body>
 </html>

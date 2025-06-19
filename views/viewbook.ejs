@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="/css/viewbook.css">
 </head>
 <body>
-    <%-include("adminNav.ejs")%>
-    <div class="main w-100 ">
-        <div class="side">
-            <%-include("aside.ejs")%>
-        </div>
-        <div class="search">
+     <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+
+  <div class="row g-0">
+    
+    <!-- Sidebar flush to the very left -->
+    <div class="col-2 p-0">
+      <%- include("aside.ejs") %>
+    </div>
+    <div class="col-10 border">
+ <div class="search w-100">
             <input type="search" placeholder="Search Books">
             <div class="rigth">
         
@@ -50,6 +55,10 @@
     </div>
         </div>
 </div>
+
 </div>
+
+        </div>
+
 </body>
 </html>

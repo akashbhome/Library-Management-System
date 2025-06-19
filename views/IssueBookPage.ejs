@@ -12,14 +12,14 @@
 </head>
 
 <body>
-    <%- include("adminNav.ejs") %>
-
-        <div class="main w-100">
-            <div class="side">
-                <%- include("aside.ejs") %>
-            </div>
-            <div class="rigth">
-                <div class="container d-flex justify-content-center align-items-center min-vh-100">
+   <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+  <div class="row g-0">
+    <div class="col-2 p-0">
+      <%- include("aside.ejs") %>
+    </div>
+    <div class="col-10">
+ <div class="container d-flex justify-content-center align-items-center max-vh-100 mt-3 ">
                     <div class="card shadow-lg p-4 w-100" style="max-width: 600px;">
                         <h3 class="text-center mb-4">Issue Book Form</h3>
 
@@ -60,7 +60,13 @@
                         </form>
                     </div>
                 </div>
-            </div>
+
+
+</div>
+
+        </div>
+</div>
+
             <script>
 
                 //search user by it's name
@@ -109,10 +115,10 @@
                             const item = document.createElement('button');
                             item.type = 'button';
                             item.className = 'list-group-item list-group-item-action';
-                            item.textContent = category.title;
+                            item.textContent = category.title + ' (' + category.isbn + ')';
  
                             item.onclick = () => {
-                                categorySearch.value = category.title;
+                                categorySearch.value = category.title + ' (' + category.isbn + ')';;
                                 categoryIdInput.value = category.id;
                                 categorySuggestions.innerHTML = '';
                             };
