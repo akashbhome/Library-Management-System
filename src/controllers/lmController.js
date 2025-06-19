@@ -47,9 +47,9 @@ exports.addReg=(req,res)=>{                                                     
 //user or member add section
 
 exports.stdAdd = (req, res) => {
-        let { name, email, password, role } = req.body;
+        let { name, email, password, role,phone } = req.body;
 
-        adminModel.addStd(name, email, password, role)
+        adminModel.addStd(name, email, password, role, phone)
         .then((result) => {
                 if (result) {
                         res.render("addstud.ejs", { msg: "Success" });
@@ -362,6 +362,7 @@ exports.issueBook=(req,res)=>{
 
 
 
+
 exports.ReturnBookPage=(req,res)=>{
         let result=adminModel.ReturnBookPage();      
         result.then((r)=>{
@@ -373,16 +374,54 @@ exports.ReturnBookPage=(req,res)=>{
                 else{
                         res.render("returnbook.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(400).send("Error issue book");
+    });
+}
 
-        });
+exports.returnBook=(req,res)=>{
+        let id=parseInt(req.query.id.trim());
+        let result=adminModel.returnBook(id);      
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                      console.log(r);
+                       res.render("returnbook.ejs",{data:r});
+                }
+                else{
+                        res.render("returnbook.ejs",{data:[]});
+                }
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(400).send("Error issue book");
+    });
+}
+
+//All history
+
+exports.AllHistory=(req,res)=>{
+        let result=adminModel.AllHistory();      
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                      console.log(r);
+                       res.render("History.ejs",{data:r});
+                }
+                else{
+                        res.render("History.ejs",{data:[]});
+                }
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(400).send("Error issue book");
+    });
 }
 
 //------------------------------------- user Section--------------------------------------------------------------------------------------------------------
-
+//profile
 exports.userProfile=(req,res)=>{
-        let id=parseInt(req.query.id.trim());
+        let id=req.query.id;
+        console.log(id);
         let result=adminModel.userProfile(id);      
         result.then((r)=>{
                 if(r.length>0)
@@ -399,16 +438,22 @@ exports.userProfile=(req,res)=>{
     });
 }
 
-
+//view books
 exports.userViewBook=(req,res)=>{
+          let id=req.query.id;
         let result=adminModel.userViewBook();  
-        result.then((r)=>{
-                if(r.length>0)
+        result.then((book)=>{
+                if(book.length>0)
                 {
-                     res.render("userViewBook.ejs",{user:r});
+                         let users=adminModel.userProfile(id);
+                users.then((r)=>{
+
+                         res.render("userViewBook.ejs",{book:book,user:r[0]});
+                })
+                
                 }
                 else{
-                     res.render("userViewBook.ejs",{user:[]});
+                     res.render("userViewBook.ejs",{book:[],user:[]});
                 }
         }) 
        .catch(err => {
@@ -418,17 +463,46 @@ exports.userViewBook=(req,res)=>{
 
 }
 
-// user seccion
+//user issue book
 
 exports.userIssueBookPage=(req,res) =>{
-        let id=parseInt(req.query.id.trim());
+        // let id=parseInt(req.query.id.trim());
+        let id=req.query.id;
         let result=adminModel.userIssueBookPage(id);
-        result.then((r) => {
-        if(r.length>0){
-                res.render("userIssueBook.ejs",{user:r});
+        result.then((iss) => {
+        if(iss.length>0){
+                let users=adminModel.userProfile(id);
+                users.then((r)=>{
+
+                         res.render("userIssueBook.ejs",{issue:iss,user:r[0]});
+                })
+               
         }
         else{
-                res.render("userIssueBook.ejs",{user: r.length > 0 ? r : [] });
+                    let users=adminModel.userProfile(id);
+                 users.then((r)=>{
+                         res.render("userIssueBook.ejs",{issue:[],user:r[0]});
+                })
+               
+        }
+});
+}
+
+exports.userHistory=(req,res) =>{
+        // let id=parseInt(req.query.id.trim());
+        let id=req.query.id;
+        let result=adminModel.userHistory(id);
+        result.then((iss) => {
+        if(iss.length>0){
+                let users=adminModel.userProfile(id);
+                users.then((r)=>{
+
+                         res.render("userHistory.ejs",{issue:iss,user:r[0]});
+                })
+               
+        }
+        else{
+                res.render("userHistory.ejs",{issue:[],user:[]});
         }
 });
 }

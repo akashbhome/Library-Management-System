@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    <style>
+        .custom-hover-shadow:hover {
+  box-shadow: 0 0.5rem 1rem rgba(221, 6, 6, 0.7) !important; /* deeper shadow on hover */
+}
+    </style>
 </head>
+
 <body> 
     <%-include("adminNav.ejs")%>
     <div class="container-fluid px-0">
@@ -15,34 +21,53 @@
       </div>
    <div class="col-10">
     <!-- Search Box -->
-    <div class="mb-4 p-3 w-50 mx-5">
-      <input id="bookSearch" type="search" class="form-control" placeholder="Search Books">
-    </div>
+   <div class="mb-4 p-3 w-50 mx-2">
+  <input id="bookSearch" type="search" class="form-control" placeholder="Search Books by Book name OR Author name">
+</div>
 
-    <% if (user.length === 0) { %>
-      <div class="text-center text-white">
-        <h1>Data is Not Available 😒</h1>
-      </div>
-    <% } else { %>
-      <!-- Books Grid -->
-      <div class="row g-4 mx-5 mb-4">
-        <% user.forEach(item => { %>
-          <div class="col-2 col-md-4 col-lg-3"> <!-- 4 per row on lg, 3 per row on md, 2 per row on sm -->
-            <div class="card h-100">
-              <img src="<%= item.image %>" class="card-img-top" alt="Cover for <%= item.title %>" style="object-fit:100% 100%; height: 200px; width:100%">
-              <div class="card-body">
-                <center> <h5 class="card-title"><%= item.title %></h5></center>
-                <p class="card-text mb-1"><strong>Author:</strong> <%= item.author %></p>
-                <p class="card-text mb-1"><strong>Category:</strong> <%= item.category %></p>
-              </div>
-            </div>
+<% if (book.length === 0) { %>
+  <div class="text-center text-white">
+    <h1>Data is Not Available 😒</h1>
+  </div>
+<% } else { %>
+  <!-- Books Grid -->
+  <div class="row g-5 mx-2 mb-3 " id="booksContainer">
+    <% book.forEach(item => { %>
+      <div class="col-6 col-md-4 col-lg-3 book-card shadow-lg p-3 mb-3 bg-body-tertiary rounded card custom-hover-shadow">
+        <div class="card h-100">
+          <img src="<%= item.image %>" class="card-img-top" alt="Cover for <%= item.title %>" style="object-fit:100% 100%; height: 200px; width:100%">
+          <div class="card-body">
+            <center><h5 class="card-title"><%= item.title %></h5></center>
+            <p class="card-text mb-1"><strong>Author:</strong> <%= item.author %></p>
+            <p class="card-text mb-1"><strong>Category:</strong> <%= item.category %></p>
           </div>
-        <% }) %>
+        </div>
       </div>
-    <% } %>
+    <% }) %>
+  </div>
+<% } %>
+
   </div>
     </div>
 
         </div>
+        <script>
+  const searchInput = document.getElementById("bookSearch");
+  searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    const books = document.querySelectorAll(".book-card");
+
+    books.forEach(card => {
+      const title = card.querySelector(".card-title").textContent.toLowerCase();
+      const author = card.querySelector(".card-text").textContent.toLowerCase();
+
+      if (title.includes(query) || author.includes(query)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
 </body>
 </html>

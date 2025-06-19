@@ -35,20 +35,19 @@ router.post("/addBook",upload.single('image'),controller.addBook);
 router.get("/deleteBook",controller.deleteBook);
 router.get("/updateBookpage",controller.updateBookpage);
 router.post("/updateBook",upload.single('image'),controller.updateBook);
-router.get("/IssueBookPage",controller.IssueBookPage);
 
+router.get("/IssueBookPage",controller.IssueBookPage);
 router.get("/admin/api/users/search",controller.searchName);
 router.get("/admin/api/category/search",controller.searchbook);
 router.post("/issueBook",controller.issueBook);
-
 router.get("/ReturnBookPage",controller.ReturnBookPage);
-
+router.get("/returnBook",controller.returnBook);
+router.get("/AllHistory",controller.AllHistory);
 
 
 //user section
 router.get("/userProfile",controller.userProfile);
 router.get("/userViewBook",controller.userViewBook);
-
-// user Sesion
 router.get("/userIssueBookPage",controller.userIssueBookPage);
+router.get("/userHistory",controller.userHistory);
 module.exports=router;
