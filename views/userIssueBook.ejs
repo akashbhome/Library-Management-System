@@ -25,19 +25,11 @@
 
                         <form action="/issueBook" method="POST">
                             <div class="mb-3">
-                                <label for="userSearch" class="form-label">Search User (Name or Email)</label>
-                                <input type="text" class="form-control" id="userSearch" autocomplete="off" required>
+                                <label for="userSearch" class="form-label">Book Title</label>
                                 <input type="hidden" name="user_id" id="user_id" required>
                                 <div id="userSuggestions" class="list-group"></div>
                             </div>
-                            <div class="mb-3">
-                                <label for="categorySearch" class="form-label">Search category</label>
-                                <input type="text" class="form-control" id="categorySearch" autocomplete="off" required>
-                                <input type="hidden" name="book_id" id="book_id" required>
-                                <div id="categorySuggestions" class="list-group"></div>
-                            </div>
-
-
+                            
                             <div class="mb-3">
                                 <label for="issue_date" class="form-label">Issue Date</label>
                                 <input type="date" class="form-control" id="issue_date" name="issue_date" required>
@@ -61,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <script>
+<script>
 
                 //search user by it's name
                 const userSearch = document.getElementById('userSearch');
@@ -137,11 +129,8 @@
                         document.getElementById("return_date").value = returnDateFormatted;
                     }
                 });
-
-
-            </script>
-
-
+</script>
+</div>
 </body>
 
 </html>

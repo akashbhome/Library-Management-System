@@ -1,6 +1,6 @@
 let service=require("../services/lmService");      //import the servises folder
 let adminModel=require("../models/lmModel.js");         //import the  model folder
-
+let usermodel=require("../models/userModel.js");
 exports.homepage=(req,res)=>{                           //call the home page at the server will start
         res.render("home.ejs");
 }
@@ -18,7 +18,14 @@ exports.admindash=(req,res)=>{                                  //after login lo
                 res.render("Admindashboard.ejs");
         }
         else{
-                res.render("loginpage.ejs",{msg:"Invalid username and Password"});
+                let result=adminModel.userlogin(username,password);
+                result.then((r)=>{
+                        if(r.length>0){
+                                req.session.userid=r[0].id;
+                                res.render("userdashboard.ejs");
+                        }
+                })
+                
         }
 }
 
@@ -108,6 +115,7 @@ exports.viewStudent=(req,res)=>{
 
 exports.deleteUser=(req,res)=>{
         let id=parseInt(req.query.id.trim());
+        console.log(id);
         let result=adminModel.deleteUser(id);
         result.then((r)=>{
                 if(r.length>0)
@@ -384,4 +392,10 @@ exports.ReturnBookPage=(req,res)=>{
 
         });
 
+}
+
+// user seccion
+
+exports.userIssueBookPage=(req,res) =>{
+        res.render("userIssueBook.ejs");
 }
