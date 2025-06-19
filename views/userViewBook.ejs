@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body> 
+    <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+  <div class="row g-0">
+    
+    <div class="col-2 p-0">
+      <%- include("userAside.ejs") %>
+      </div>
+   <div class="col-10">
+    <!-- Search Box -->
+    <div class="mb-4 p-3 w-50 mx-5">
+      <input id="bookSearch" type="search" class="form-control" placeholder="Search Books">
+    </div>
+
+    <% if (user.length === 0) { %>
+      <div class="text-center text-white">
+        <h1>Data is Not Available 😒</h1>
+      </div>
+    <% } else { %>
+      <!-- Books Grid -->
+      <div class="row g-4 mx-5 mb-4">
+        <% user.forEach(item => { %>
+          <div class="col-2 col-md-4 col-lg-3"> <!-- 4 per row on lg, 3 per row on md, 2 per row on sm -->
+            <div class="card h-100">
+              <img src="<%= item.image %>" class="card-img-top" alt="Cover for <%= item.title %>" style="object-fit:100% 100%; height: 200px; width:100%">
+              <div class="card-body">
+                <center> <h5 class="card-title"><%= item.title %></h5></center>
+                <p class="card-text mb-1"><strong>Author:</strong> <%= item.author %></p>
+                <p class="card-text mb-1"><strong>Category:</strong> <%= item.category %></p>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+    </div>
+
+        </div>
+</body>
+</html>

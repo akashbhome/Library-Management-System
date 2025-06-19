@@ -42,4 +42,10 @@ router.get("/admin/api/category/search",controller.searchbook);
 router.post("/issueBook",controller.issueBook);
 
 router.get("/ReturnBookPage",controller.ReturnBookPage);
+
+
+
+//user section
+router.get("/userProfile",controller.userProfile);
+router.get("/userViewBook",controller.userViewBook);
 module.exports=router;

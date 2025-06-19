@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body> 
+    <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+  <div class="row g-0">
+    
+    <div class="col-2 p-0">
+      <%- include("userAside.ejs") %>
+    </div>
+    <div class="col-10">
+                <div><%=user.name%></div>
+                <div><%=user.email%></div>
+    </div>
+
+        </div>
+</div>
+</body>
+</html>
