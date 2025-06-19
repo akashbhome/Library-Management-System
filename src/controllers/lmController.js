@@ -236,6 +236,7 @@ exports.viewbook=(req,res)=> {
         }
 });
 }
+
 exports.addBookPage=(req,res)=>{
         let categories=adminModel.viewcategory();
         categories.then((r)=>{
@@ -427,7 +428,7 @@ exports.userIssueBookPage=(req,res) =>{
                 res.render("userIssueBook.ejs",{user:r});
         }
         else{
-                res.render("userIssueBook.ejs",{user:[]});
+                res.render("userIssueBook.ejs",{user: r.length > 0 ? r : [] });
         }
 });
 }
