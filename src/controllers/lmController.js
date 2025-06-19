@@ -342,11 +342,6 @@ exports.searchbook = async (req, res) => {
 
 exports.issueBook=(req,res)=>{
         let{user_id,book_id,issue_date,return_date,status}=req.body;
-          console.log(user_id);
-             console.log(book_id);
-              console.log(issue_date);
-               console.log(return_date);
-                console.log(status);
         let result=adminModel.issueBook(user_id,book_id,issue_date,return_date,status);      
         result.then((r)=>{
                 if(r.length>0)
@@ -360,7 +355,7 @@ exports.issueBook=(req,res)=>{
         }) 
        .catch(err => {
       console.error("Error adding student:", err);
-      res.status(500).send("Error adding student");
+      res.status(400).send("Error issue book");
     });
 }
 
@@ -381,6 +376,44 @@ exports.ReturnBookPage=(req,res)=>{
                 res.render("err.ejs");
 
         });
+}
+
+//------------------------------------- user Section--------------------------------------------------------------------------------------------------------
+
+exports.userProfile=(req,res)=>{
+        let id=parseInt(req.query.id.trim());
+        let result=adminModel.userProfile(id);      
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                     res.render("UserProfile.ejs",{user:r[0]});
+                }
+                else{
+                     res.render("UserProfile.ejs",{user:[]});
+                }
+        }) 
+       .catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error User not Found");
+    });
+}
+
+
+exports.userViewBook=(req,res)=>{
+        let result=adminModel.userViewBook();  
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                     res.render("userViewBook.ejs",{user:r});
+                }
+                else{
+                     res.render("userViewBook.ejs",{user:[]});
+                }
+        }) 
+       .catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error books not in lab");
+    });
 
 }
 

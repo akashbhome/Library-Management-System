@@ -299,7 +299,7 @@ exports.ReturnBookPage=()=>{
 // };
 
 
-//User Login 
+//-------------------------User Login ------------------------------------------------------------
 exports.userlogin = (username, password) => {
   return new Promise((resolve, reject) => {
     conn.query(
@@ -311,6 +311,36 @@ exports.userlogin = (username, password) => {
         }
         else {
         resolve(result);
+        }
+      });
+  });
+};
+
+exports.userProfile = (id) => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      "SELECT * FROM users WHERE id=?",[id],
+      (err, result) => {
+        if (err) {
+          reject(err);
+        }
+         else {
+          resolve(result);
+        }
+      });
+  });
+};
+
+
+exports.userViewBook = () => {
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT * FROM books",
+      (err, result) => {
+        if (err) {
+          reject(err);
+        }
+         else {
+          resolve(result);
         }
       });
   });

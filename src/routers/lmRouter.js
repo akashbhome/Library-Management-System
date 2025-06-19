@@ -43,6 +43,12 @@ router.post("/issueBook",controller.issueBook);
 
 router.get("/ReturnBookPage",controller.ReturnBookPage);
 
+
+
+//user section
+router.get("/userProfile",controller.userProfile);
+router.get("/userViewBook",controller.userViewBook);
+
 // user Sesion
 router.get("/userIssueBookPage",controller.userIssueBookPage);
 module.exports=router;
