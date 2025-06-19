@@ -1,5 +1,6 @@
  body{
-        height: 90vh;
+       min-height:100vh;
+       border: solid;
     }
     .main{
             width:100%;

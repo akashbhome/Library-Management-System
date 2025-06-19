@@ -1,6 +1,6 @@
 let service=require("../services/lmService");      //import the servises folder
 let adminModel=require("../models/lmModel.js");         //import the  model folder
-let usermodel=require("../models/userModel.js");
+
 exports.homepage=(req,res)=>{                           //call the home page at the server will start
         res.render("home.ejs");
 }
@@ -8,6 +8,10 @@ exports.homepage=(req,res)=>{                           //call the home page at 
 
 exports.adminLogin=(req,res)=>{                                //call login page
         res.render("loginpage.ejs",{msg:""});
+}
+
+exports.admin=(req,res)=>{
+        res.render("Admindashboard.ejs");
 }
 
 exports.admindash=(req,res)=>{                                  //after login login successfullt then go to admindaesh board
@@ -22,7 +26,7 @@ exports.admindash=(req,res)=>{                                  //after login lo
                 result.then((r)=>{
                         if(r.length>0){
                                 req.session.userid=r[0].id;
-                                res.render("userdashboard.ejs");
+                                res.render("userdashboard.ejs",{user:r[0]});
                         }
                 })
                 
@@ -36,7 +40,7 @@ exports.about=(req,res)=>{
 
 
 
-exports.addReg=(req,res)=>{                                      //member or user regitsrtion page calling
+exports.addReg=(req,res)=>{                                                     //member or user regitsrtion page calling
         res.render("addstud.ejs",{msg:""});
 }
 
@@ -52,10 +56,10 @@ exports.stdAdd = (req, res) => {
                 } else {
                 res.render("addstud.ejs", { msg: "Failed" });
                 }
-        })
-        .catch((err) => {
-                res.render("addstud.ejs", { msg: "Error occurred" });
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 };
 
 // update user or memeber section
@@ -69,9 +73,10 @@ exports.stdUpdate = (req, res) => {
         } else {
                 res.render("stdupdate.ejs", { std:[] });
         }
-        }).catch((err) => {
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 };
 
 exports.newUpdatedUser=(req,res)=>{
@@ -88,9 +93,10 @@ exports.newUpdatedUser=(req,res)=>{
                 else{
                         res.render("view.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
 
 // member and user view section
@@ -106,16 +112,16 @@ exports.viewStudent=(req,res)=>{
                 else{
                         res.render("view.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
 
 //member delete section
 
 exports.deleteUser=(req,res)=>{
         let id=parseInt(req.query.id.trim());
-        console.log(id);
         let result=adminModel.deleteUser(id);
         result.then((r)=>{
                 if(r.length>0)
@@ -125,9 +131,10 @@ exports.deleteUser=(req,res)=>{
                 else{
                         res.render("view.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
 
 //add category section
@@ -174,13 +181,13 @@ exports.deletecategory=(req,res)=>{
                 else{
                         res.render("viewcategory.ejs",{cat:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
 
 // Update Category section
-
 exports.updatecategory=(req, res) => {
         let id=parseInt(req.query.id.trim());
         let result=adminModel.updatecat(id);
@@ -192,10 +199,10 @@ exports.updatecategory=(req, res) => {
                 else{
                         res.render("catupdate.ejs",{data:[]});
                 }
-        }).catch((err) => {
-                res.render("err.ejs");
-        });
-
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
 
 exports.newUpdatedcat=(req,res)=>{
@@ -211,11 +218,12 @@ exports.newUpdatedcat=(req,res)=>{
                 else{
                         res.render("viewcategory.ejs",{cat:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
+
 // View Book Session
 exports.viewbook=(req,res)=> {
         console.log("hello");
@@ -229,7 +237,6 @@ exports.viewbook=(req,res)=> {
         }
 });
 }
-
 exports.addBookPage=(req,res)=>{
         let categories=adminModel.viewcategory();
         categories.then((r)=>{
@@ -248,13 +255,11 @@ exports.addBook=(req,res)=>{
         let result=adminModel.addBook(title,author,publisher,isbn,category,total_copies,available_copies,status,image);
         result.then((r)=>{
                 res.render("addBooks.ejs",{cat:r,msg:"Book Added SuccessFully"});
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
-
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
-
-
 
 exports.deleteBook=(req,res)=>{
        let id=parseInt(req.query.id.trim());
@@ -267,9 +272,10 @@ exports.deleteBook=(req,res)=>{
                 else{
                         res.render("viewbook.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
 
 exports.updateBookpage=(req,res)=>{
@@ -284,9 +290,10 @@ exports.updateBookpage=(req,res)=>{
                 else{
                         res.render("updateBook.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
        
 }
 exports.updateBook=(req,res)=>{
@@ -301,32 +308,12 @@ exports.updateBook=(req,res)=>{
                 else{
                         res.render("viewbook.ejs",{data:[]});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-
-        });
+        }).catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 
 }
-// search student
-
-// exports.searchStud = async (req, res) => {
-//         alert("hello" +str);
-//     try {
-
-//         const searchValue = req.query.sd.trim();
-//         console.log("Received search value:", searchValue);
-
-//         const stud = await adminModel.searchAllStudent(searchValue);  // Await added
-//         console.log("Search result:", stud);
-
-//         res.json(stud);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Something went wrong" });
-//     }
-// };
-
-
 exports.IssueBookPage=(req,res)=>{
         res.render("IssueBookPage.ejs");
 
@@ -336,11 +323,12 @@ exports.searchName = async (req, res) => {
     const { q } = req.query; // Use 'q' because your front-end is sending 'q' not 'name'
     const result = await adminModel.searchName(q);
     res.json(result);
-  } catch (err) {
-    console.error("Database error:", err);
-    res.status(500).json({ error: "Database error" });
   }
-};
+  catch(err){
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    };
+}
 
 exports.searchbook = async (req, res) => {
   try {
@@ -370,11 +358,14 @@ exports.issueBook=(req,res)=>{
                 else{
                         res.render("IssueBookPage.ejs",{msg:""});
                 }
-        }).catch((err)=>{
-                res.render("err.ejs");
-
-        });
+        }) 
+       .catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error adding student");
+    });
 }
+
+
 
 exports.ReturnBookPage=(req,res)=>{
         let result=adminModel.ReturnBookPage();      

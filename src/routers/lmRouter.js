@@ -7,6 +7,7 @@ let router=routers.Router();
 router.get("/",controller.homepage);
 router.get("/login",controller.adminLogin);
 router.post("/adminLog",controller.admindash);
+router.get("/admin",controller.admin);
 
 // User Pannel
 router.get("/addReg",controller.addReg);

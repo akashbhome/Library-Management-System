@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .side{
+            width:20%;
+        }
+        body{
+            min-height: 100vh;
+            border: solid;
+        }
+    </style>
+</head>
+<body>
+    <%-include("adminNav.ejs")%>
+    <div class="container-fluid px-0">
+  <!-- 2. Create a row with gutters turned off -->
+  <div class="row g-0">
+    
+    <!-- Sidebar flush to the very left -->
+    <div class="col-2 p-0">
+      <%- include("userAside.ejs") %>
+    </div>
+    <div class="col-8">
+  <!-- Centered big outlined container -->
+  <div class=" p-4 mt-5 mx-auto" style="min-height:200px; max-width:800px;">
+
+    <!-- First row of three stats -->
+    
+    </div>
+
+</div>
+
+        </div>
+</div>
+</body>
+</html>
