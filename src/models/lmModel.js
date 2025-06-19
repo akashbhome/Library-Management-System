@@ -2,10 +2,10 @@ const conn = require("../../db.js");        //connected database
 
 //add user on database
 
-exports.addStd = (name, email, password, role) => {
+exports.addStd = (name, email, password, role,phone) => {
     return new Promise((resolve, reject) => {
-        conn.query("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
-            [name, email, password, role], (err, result) => {
+        conn.query("INSERT INTO users (name, email, password, role,contact) VALUES (?, ?, ?, ?,?)",
+            [name, email, password, role,phone], (err, result) => {
                 if (err) {
                     console.error("DB Error:", err);
                     return reject(err);
@@ -268,7 +268,7 @@ exports.issueBook=(user_id,book_id,issue_date,return_date,status)=>{
 exports.ReturnBookPage=()=>{
     return new Promise((resolve, reject) => {
 
-            conn.query("SELECT issue_details.id,users.name as name,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id",
+            conn.query("SELECT issue_details.id,users.name as name,users.email as email,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id where issue_details.status='issued'",
                 (err,result)=>{  
                 if (err) {
                 return reject(err);
@@ -280,8 +280,37 @@ exports.ReturnBookPage=()=>{
     })
 
 }
+exports.returnBook=(id)=>{
+    return new Promise((resolve, reject) => {
+        conn.query("update issue_details set status='returned' where id=?",[id],(err,result)=>{
+            conn.query("SELECT issue_details.id,users.name as name, users.email as email,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id where issue_details.status='issued'",
+                (err1,result1)=>{  
+                if (err) {
+                return reject(err1);
+                }
+                else{
+                    resolve(result1);
+                }
+            });
+        });
+            
+    })
+}
 
 
+exports.AllHistory=()=>{
+    return new Promise((resolve, reject) => {
+            conn.query("SELECT issue_details.id,users.name as name,users.email as email,books.title AS title,issue_details.issue_date,issue_details.return_date,issue_details.status FROM issue_details JOIN users ON issue_details.issued_by = users.id JOIN books ON issue_details.book_id = books.id",
+                (err,result)=>{  
+                if (err) {
+                return reject(err);
+                }
+                else{
+                    resolve(result);
+                }
+            });
+        });
+}
 
 // add student search
 
@@ -347,6 +376,20 @@ exports.userViewBook = () => {
 };
 
 exports.userIssueBookPage=(id) =>{
+    return new Promise((resolve,reject) => {
+        conn.query("SELECT b.title,i.issue_date,i.return_date,i.status FROM issue_details i JOIN books b ON i.book_id = b.id WHERE i.issued_by = ? and i.status='issued'; ",[id],(err,result) =>{
+            if(err) {
+                return reject(err);
+            }
+            else{
+                resolve (result);
+            }
+        });
+
+    });
+}
+
+exports.userHistory=(id) =>{
     return new Promise((resolve,reject) => {
         conn.query("SELECT b.title,i.issue_date,i.return_date,i.status FROM issue_details i JOIN books b ON i.book_id = b.id WHERE i.issued_by = ?; ",[id],(err,result) =>{
             if(err) {
