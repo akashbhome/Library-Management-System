@@ -226,7 +226,6 @@ exports.newUpdatedcat=(req,res)=>{
 
 // View Book Session
 exports.viewbook=(req,res)=> {
-        console.log("hello");
         let result=adminModel.viewbook();
         result.then((r) => {
         if(r.length>0){
@@ -388,5 +387,14 @@ exports.ReturnBookPage=(req,res)=>{
 // user seccion
 
 exports.userIssueBookPage=(req,res) =>{
-        res.render("userIssueBook.ejs");
+        let id=parseInt(req.query.id.trim());
+        let result=adminModel.userIssueBookPage(id);
+        result.then((r) => {
+        if(r.length>0){
+                res.render("userIssueBook.ejs",{user:r});
+        }
+        else{
+                res.render("userIssueBook.ejs",{user:[]});
+        }
+});
 }

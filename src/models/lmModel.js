@@ -315,3 +315,17 @@ exports.userlogin = (username, password) => {
       });
   });
 };
+
+exports.userIssueBookPage=(id) =>{
+    return new Promise((resolve,reject) => {
+        conn.query("SELECT b.title,i.issue_date,i.return_date,i.status FROM issue_details i JOIN books b ON i.book_id = b.id WHERE i.issued_by = ?; ",[id],(err,result) =>{
+            if(err) {
+                return reject(err);
+            }
+            else{
+                resolve (result);
+            }
+        });
+
+    });
+}

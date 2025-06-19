@@ -44,5 +44,5 @@ router.post("/issueBook",controller.issueBook);
 router.get("/ReturnBookPage",controller.ReturnBookPage);
 
 // user Sesion
-router.get("/userIssueBook",controller.userIssueBookPage);
+router.get("/userIssueBookPage",controller.userIssueBookPage);
 module.exports=router;
