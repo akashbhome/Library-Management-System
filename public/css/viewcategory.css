@@ -4,7 +4,7 @@
     height: 30px;
     padding: 1px 14px;
     align-items: center;
-    margin-left:20px;
+    margin-left:0px;
     font-weight: bold;
     border-radius: 10px;
 
@@ -15,8 +15,8 @@
 }
 
  .UD_upd{
-    background-color:rgb(75, 232, 125);
+    background-color:rgb(7, 253, 85);
 }
 .UD_del{
-    background-color:rgb(216, 95, 91);
+    background-color:rgb(244, 9, 1);
 }
