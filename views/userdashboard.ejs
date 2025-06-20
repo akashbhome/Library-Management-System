@@ -12,28 +12,30 @@
         .high{
             min-height: 89vh;
         }
+        .udash{
+          height:300px;
+          background-image: url("/image/book.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+        }
   </style>
 </head>
 <body>
     <%-include("userNavBar.ejs")%>
     <div class="container-fluid px-0">
-  <!-- 2. Create a row with gutters turned off -->
   <div class="row g-0 high">
     
-    <!-- Sidebar flush to the very left -->
     <div class="col-2 p-0">
       <%- include("userAside.ejs") %>
     </div>
-    <div class="col-8">
-  <!-- Centered big outlined container -->
-  <div class=" p-4 mt-5 mx-auto" style="min-height:200px; max-width:800px;">
-
-    <!-- First row of three stats -->
-    
+    <div class="col-10 p-5">
+  <div class="container mt-5 text-md-center">
+                <h1 class="m-auto mt-5 w-75">Wel-come to Labrary <h1 class="text-danger"><%=user.name%></h1></h1>
+              </div>
+              <div class=" w-50 m-auto mt-5 udash">
+              </div>
     </div>
-
-</div>
-
+              
         </div>
 </div>
 </body>

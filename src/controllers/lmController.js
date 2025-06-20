@@ -9,6 +9,7 @@ exports.homepage=(req,res)=>{                           //call the home page at 
 exports.adminLogin=(req,res)=>{                                //call login page
         res.render("loginpage.ejs",{msg:""});
 }
+
 exports.logout=(req,res)=>{
         req.session.destroy(()=>{
                  res.redirect('/login');
@@ -32,6 +33,9 @@ exports.admindash=(req,res)=>{                                  //after login lo
                         if(r.length>0){
                                 req.session.userid=r[0].id;
                                 res.render("userdashboard.ejs",{user:r[0]});
+                        }
+                        else{
+                                 res.render("loginpage.ejs",{msg:"Invalid Username and Password "}); 
                         }
                 })
                 

@@ -25,11 +25,13 @@
         <div class="col-md-6">
           <label for="title" class="form-label">Title</label>
           <input type="text" id="title" name="title" class="form-control" placeholder="Add title" required>
+          <div id="titleError" style="color: red; font-size: 0.9em;"></div>
         </div>
 
         <div class="col-md-6">
           <label for="author" class="form-label">Author</label>
           <input type="text" id="author" name="author" class="form-control" placeholder="Add Author" required>
+          <div id="authorError" style="color: red; font-size: 0.9em;"></div>
         </div>
 
         <div class="col-md-6">
@@ -97,6 +99,41 @@
 </div>
 
 <script>
+  //Title name
+   const titleInput = document.getElementById('title');
+  const titleError = document.getElementById('titleError');
+
+  titleInput.addEventListener('input', () => {
+    const titleValue = titleInput.value.trim();
+    const noSymbols = /^[A-Za-z0-9 ]+$/;
+
+    if (!noSymbols.test(titleValue)) {
+      titleError.textContent = "Invalid Title";
+      titleInput.setCustomValidity("Invalid");
+    } else {
+      titleError.textContent = "";
+      titleInput.setCustomValidity("");
+    }
+  });
+
+// Author
+
+ const authorInput = document.getElementById('author');
+  const authorError = document.getElementById('authorError');
+
+  authorInput.addEventListener('input', () => {
+    const authorValue = authorInput.value.trim();
+    const onlyLetters = /^[A-Za-z ]+$/;
+
+    if (!onlyLetters.test(authorValue)) {
+      authorError.textContent = "Author name must contain only letters and spaces.";
+      authorInput.setCustomValidity("Invalid");
+    } else {
+      authorError.textContent = "";
+      authorInput.setCustomValidity("");
+    }
+  });
+  //Available Book
   const totalInput = document.getElementById('total_copies');
   const availableInput = document.getElementById('available_copies');
   const errorDiv = document.createElement('div');

@@ -75,48 +75,70 @@
 </div>
 
 <script>
+  //name
   const nameInput = document.getElementById('name');
-  const phoneInput = document.getElementById('phone');
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const submitBtn = document.getElementById('submitBtn');
-
   const nameError = document.getElementById('nameError');
+
+  nameInput.addEventListener('input', function () {
+    const nameValue = nameInput.value.trim();
+    const onlyLetters = /^[A-Za-z ]+$/;
+
+    if (!onlyLetters.test(nameValue)) {
+      nameError.textContent = "Only letters and spaces are allowed.";
+      nameInput.setCustomValidity("Invalid");
+    } else {
+      nameError.textContent = "";
+      nameInput.setCustomValidity("");
+    }
+  });
+
+  //phone number
+  const phoneInput = document.getElementById('phone');
   const phoneError = document.getElementById('phoneError');
+
+  phoneInput.addEventListener('input', () => {
+    const phoneValue = phoneInput.value.trim();
+    const onlyDigits = /^[0-9]{10}$/;
+
+    if (!onlyDigits.test(phoneValue)) {
+      phoneError.textContent = "Phone number must be exactly 10 digits.";
+      phoneInput.setCustomValidity("Invalid");
+    } else {
+      phoneError.textContent = "";
+      phoneInput.setCustomValidity("");
+    }
+  });
+
+  //Gmail
+  const emailInput = document.getElementById('email');
   const emailError = document.getElementById('emailError');
-  const passError = document.getElementById('passwordError');
 
-  const patterns = {
-    name: /^[A-Za-z\s]{2,50}$/,
-    phone: /^\d{10,12}$/,
-    password: /^.{6,}$/
-  };
+  emailInput.addEventListener('input', () => {
+    const emailValue = emailInput.value.trim().toLowerCase();
 
-  function validateField(value, pattern) {
-    return pattern.test(value.trim());
-  }
+    if (!emailValue.endsWith('@gmail.com')) {
+      emailError.textContent = "Invalid Email";
+      emailInput.setCustomValidity("Invalid");
+    } else {
+      emailError.textContent = "";
+      emailInput.setCustomValidity("");
+    }
+  });
+  
+  //password
+    const passwordInput = document.getElementById('password');
+  const passwordError = document.getElementById('passwordError');
 
-  function validateForm() {
-    const isNameValid = validateField(nameInput.value, patterns.name);
-    const isPhoneValid = validateField(phoneInput.value, patterns.phone);
-    const isPasswordValid = validateField(passwordInput.value, patterns.passordword);
-    const isEmailValid = emailInput.value.trim() !== ""; // Basic required, HTML5 validates format
+  passwordInput.addEventListener('input', () => {
+    const passwordValue = passwordInput.value.trim();
 
-    // Name error
-    nameError.textContent = isNameValid ? "" : "Name must be 2–50 letters/spaces only.";
-    // Phone error
-    phoneError.textContent = isPhoneValid ? "" : "Phone must be 10 digits.";
-    // Password error
-    passError.textContent = isPasswordValid ? "" : "Password must be at least 6 characters long.";
-    // Email error
-    emailError.textContent = isEmailValid ? "" : "Please enter a valid email address.";
-    
-    // Enable/disable the submit button
-    submitBtn.disabled = !(isNameValid && isPhoneValid && isEmailValid && isPasswordValid);
-  }
-
-  [nameInput, phoneInput, emailInput, passwordInput].forEach(input => {
-    input.addEventListener('input', validateForm);
+    if (passwordValue.length < 5) {
+      passwordError.textContent = "Password must be at least 5 characters.";
+      passwordInput.setCustomValidity("Invalid");
+    } else {
+      passwordError.textContent = "";
+      passwordInput.setCustomValidity("");
+    }
   });
 </script>
 
