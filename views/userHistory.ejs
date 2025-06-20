@@ -6,24 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User History</title>
   <link rel="stylesheet" href="/css/navSide.css">
-  <style>
-
+ <style>
+     body{
+            min-height:100vh;
+            border:solid;
+        }
+        .high{
+            min-height: 89vh;
+        }
   </style>
 </head>
 
 <body>
-  <%-include("adminNav.ejs")%>
+  <%-include("userNavBar.ejs")%>
     <div class="container-fluid px-0">
 
-      <div class="row g-0">
+      <div class="row g-0 high">
 
         <div class="col-2 p-0">
           <%- include("userAside.ejs") %>
         </div>
         <div class="col-10 border">
-          <table class="table table-striped table-bordered mt-5 p-5 w-75 m-5 ">
+                    <div class="m-5"><h2>History</h2></div>
+
+          <table class="table table-striped table-bordered  mt-5 p-5 w-75 m-5">
             <thead>
-              <tr>
+              <tr >
                 <th>Sr.no</th>
                 <th scope="col">Title</th>
                 <th scope="col">Issue Date</th>
@@ -35,7 +43,7 @@
             <tbody id="tbody">
               <% if (issue.length==0) { %>
                 <tr>
-                  <td colspan="4">NO data Available</td>
+                  <td colspan="5">NO data Available</td>
                 </tr>
                 <% } else { issue.forEach((item, index)=> {
                   %>

@@ -9,6 +9,8 @@ router.get("/login",controller.adminLogin);
 router.post("/adminLog",controller.admindash);
 router.get("/admin",controller.admin);
 
+router.get("/logout",controller.logout);
+
 // User Pannel
 router.get("/addReg",controller.addReg);
 router.get("/about",controller.about);
@@ -46,6 +48,7 @@ router.get("/AllHistory",controller.AllHistory);
 
 
 //user section
+router.get("/userdash",controller.userdash);
 router.get("/userProfile",controller.userProfile);
 router.get("/userViewBook",controller.userViewBook);
 router.get("/userIssueBookPage",controller.userIssueBookPage);
