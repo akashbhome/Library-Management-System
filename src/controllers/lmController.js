@@ -9,6 +9,11 @@ exports.homepage=(req,res)=>{                           //call the home page at 
 exports.adminLogin=(req,res)=>{                                //call login page
         res.render("loginpage.ejs",{msg:""});
 }
+exports.logout=(req,res)=>{
+        req.session.destroy(()=>{
+                 res.redirect('/login');
+        });
+}
 
 exports.admin=(req,res)=>{
         res.render("Admindashboard.ejs");
@@ -410,7 +415,6 @@ exports.AllHistory=(req,res)=>{
         result.then((r)=>{
                 if(r.length>0)
                 {
-                      console.log(r);
                        res.render("History.ejs",{data:r});
                 }
                 else{
@@ -423,6 +427,25 @@ exports.AllHistory=(req,res)=>{
 }
 
 //------------------------------------- user Section--------------------------------------------------------------------------------------------------------
+exports.userdash=(req,res)=>{
+        let id=req.query.id;
+        let result=adminModel.userProfile(id);      
+        result.then((r)=>{
+                if(r.length>0)
+                {
+                     res.render("userdashboard.ejs",{user:r[0]});
+                }
+                else{
+                     res.render("userdashboard.ejs",{user:[]});
+                }
+        }) 
+       .catch(err => {
+      console.error("Error adding student:", err);
+      res.status(500).send("Error User not Found");
+    });
+}
+
+
 //profile
 exports.userProfile=(req,res)=>{
         let id=req.query.id;
@@ -491,7 +514,7 @@ exports.userIssueBookPage=(req,res) =>{
                
         }
 });
-}
+} 
 
 exports.userHistory=(req,res) =>{
         // let id=parseInt(req.query.id.trim());
@@ -507,7 +530,12 @@ exports.userHistory=(req,res) =>{
                
         }
         else{
-                res.render("userHistory.ejs",{issue:[],user:[]});
+                    let users=adminModel.userProfile(id);
+                 users.then((r)=>{
+                       res.render("userHistory.ejs",{issue:[],user:r[0]});
+                })
+               
+                
         }
 });
 }

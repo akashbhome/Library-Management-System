@@ -356,6 +356,7 @@ exports.userProfile = (id) => {
           reject(err);
         }
          else {
+            console.log(result);
           resolve(result);
         }
       });

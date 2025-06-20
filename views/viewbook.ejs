@@ -3,64 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/viewbook.css">
+    <title> view book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .custom-hover-shadow:hover {
+            box-shadow: 0 0.5rem 1rem rgba(221, 6, 6, 0.7) !important;
+        }
+    </style>
 </head>
-<body>
-     <%-include("adminNav.ejs")%>
+<body> 
+    <%-include("adminNav.ejs")%>
     <div class="container-fluid px-0">
+        <div class="row g-0">
+            <div class="col-2 p-0">
+                <%- include("aside.ejs") %>
+            </div>
+            <div class="col-10">
+                  <div class="mt-2 mx-5"><h2>View Books</h2></div>
+                <div class="mb-4 p-0 w-50 mx-5">
+                    <input id="bookSearch" type="search" class="form-control" placeholder="Search Books by Book name OR Author name">
+                </div>
 
-  <div class="row g-0">
-    
-    <!-- Sidebar flush to the very left -->
-    <div class="col-2 p-0">
-      <%- include("aside.ejs") %>
-    </div>
-    <div class="col-10 border">
- <div class="search w-100">
-            <input type="search" placeholder="Search Books">
-            <div class="rigth">
-        
-        <% if (data.length == 0) { %>
-    <label for=""><h1>Data is Not Available 😒</h1></label>
-    <% } else {
-                data.forEach((item) => {
-        %>
-       <div class="books">
-           <center><img src="<%=item.image%>" alt="NO image found"></center><br>
-          <div class="infoBook">
-               <div>
-                <label for=""><b>Title : </b> <%=item.title%></label><br>
-                <label for=""><b>Author : </b> <%=item.author%></label><br>
-                <label for=""><b>Publisher : </b> <%=item.publisher%></label><br>
-                <label for=""><b>Category : </b> <%=item.category%></label><br> 
-                 
-               </div>
-               <div>
-                <label for=""><b>ISBN : </b><%=item.isbn%></label><br>
-                <label for=""><b>Status : </b> <%=item.status%></label><br>
-                <label for=""><b>Total Copies : </b> <%=item.total_copies%></label><br>
-                <label for=""><b>Available Copies : </b> <%=item.available_copies%></label><br>   
-               </div>
-          </div>
-          <div class="viewBookBtn">
-            <button class="UD_Btn UD_del"><a href="/deleteBook?id=<%=item.id%>">Delete</a></button>
-            <button class="UD_Btn UD_upd"><a href="/updateBookpage?id=<%=item.id%>">Update</a></button> 
-          </div>
+                <% if (data.length === 0) { %>
+                    <div class="text-center text-white">
+                        <h1>Data is Not Available 😒</h1>
+                    </div>
+                <% } else { %>
+                <!-- Books Grid -->
+                <div class="row g-5 mx-0 w-100" id="booksContainer">
+                    <% data.forEach((item, index) => { %>
+                <div class="col-12 mx-4 col-md-6 col-lg-3_5 p-2 book-card shadow-lg mb-3 bg-body-tertiary rounded card custom-hover-shadow" style="flex: 0 0 28%; max-width: 28%;">
 
-       </div>
+                            <div class="card h-100">
+                                <img src="<%= item.image %>" class="card-img-top" alt="Cover for <%= item.title %>" style="object-fit:100% 100%; height: 200px; width:100%">
+                                <div class="card-body">
+                                    <center><h5 class="card-title"><%= item.title %></h5></center>
+                                    <p class="card-text mx-3"><strong>Author:</strong> <%=item.author%></p>
+                                    <div class="infoBook d-flex justify-content-between pt-2 px-1 py-1">
+                                        <div class="p-0">
+                                            <p><strong>Publisher:</strong> <%=item.publisher%></p>
+                                            <p><strong>Category:</strong> <%=item.category%></p>
+                                            <p><strong>Status:</strong> <%=item.status%></p>
+                                        </div>
+                                        <div class="p-0">
+                                            <p><strong>ISBN:</strong> <%=item.isbn%></p>
+                                            <p><strong>Total Copies:</strong> <%=item.total_copies%></p>
+                                            <p><strong>Available Copies:</strong> <%=item.available_copies%></p>
+                                        </div>
 
-    <%})}%>
+                                  </div>
+                                                                             <div class="viewBookBtn mt-2">
+            <center> <button class="btn btn-danger btn-sm"><a href="/deleteBook?id=<%=item.id%>" class="text-white text-decoration-none">Delete</a></button>
+              <button class="btn btn-primary btn-sm"><a href="/updateBookpage?id=<%=item.id%>" class="text-white text-decoration-none">Update</a></button>
+           </center>  </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+                <% } %>
 
-    </div>
+                <nav>
+                    <ul id="pagination" class="pagination justify-content-center my-3"></ul>
+                </nav>
+            </div>
         </div>
-        
+    </div>
 
-</div>
+    <script>
+        const rowsPerPage = 3;
+        let currentPage = 1;
 
-</div>
+        const searchInput = document.getElementById("bookSearch");
+        const allBooks = Array.from(document.querySelectorAll('.book-card'));
+        const container = document.getElementById('booksContainer');
+        const pagination = document.getElementById('pagination');
+        let filteredBooks = [...allBooks];
 
-        </div>
+        function displayBooks(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = page * rowsPerPage;
+            allBooks.forEach(book => book.style.display = 'none');
+            filteredBooks.forEach((book, index) => {
+                book.style.display = index >= start && index < end ? 'block' : 'none';
+            });
+        }
 
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredBooks.length / rowsPerPage);
+            pagination.innerHTML = '';
+
+            if (totalPages <= 1) return;
+
+            const createPageItem = (text, page, active = false, disabled = false) => {
+                const li = document.createElement('li');
+                li.className = `page-item ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}`;
+
+                const a = document.createElement('a');
+                a.className = 'page-link';
+                a.href = '#';
+                a.innerText = text;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (!disabled) {
+                        currentPage = page;
+                        displayBooks(currentPage);
+                        updatePagination();
+                    }
+                });
+                li.appendChild(a);
+                return li;
+            };
+
+            pagination.appendChild(createPageItem('«', currentPage - 1, false, currentPage === 1));
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.appendChild(createPageItem(i, i, currentPage === i));
+            }
+
+            pagination.appendChild(createPageItem('»', currentPage + 1, false, currentPage === totalPages));
+        }
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            filteredBooks = allBooks.filter(book => {
+                const title = book.querySelector(".card-title").innerText.toLowerCase();
+                const author = book.querySelector(".card-text").innerText.toLowerCase();
+                return title.includes(query) || author.includes(query);
+            });
+            currentPage = 1;
+            displayBooks(currentPage);
+            updatePagination();
+        });
+
+        displayBooks(currentPage);
+        updatePagination();
+    </script>
 </body>
 </html>

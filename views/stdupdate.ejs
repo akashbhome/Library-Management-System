@@ -10,31 +10,58 @@
 </head>
 <body>
     <%- include("adminNav.ejs") %>
-
-    <div class="main w-100">
-        <div class="side">
-            <%- include("aside.ejs") %>
-        </div>
-        <div class="rightSide">
-            <div class="updateStd">
-                <h1>Update User</h1>
-                <form action="/updateUser?id=<%=std.id%>" method="POST">
-                    <input type="text" id="name" value="<%= std.name || '' %>" name="name" placeholder="Enter the updated name"><br>
-
-                    <input type="text" id="email" value="<%= std.email || '' %>" name="email" placeholder="Enter the updated Email"><br>
-
-                    <input type="password" id="password" value="<%= std.password || '' %>" name="password" placeholder="Enter password"><br>
-
-                    <select name="role" id="role">
-                        <option value="">Select Role</option>
-                        <option value="member" <%= std.role === 'member' ? 'selected' : '' %>>member</option>
-                        <!-- Add more roles if needed -->
-                    </select><br>
-
-                    <input type="submit" value="Update">
-                </form>
-            </div>
-        </div>
+    <div class="container-fluid px-0">
+  <div class="row g-0 high">
+    
+    <div class="col-2 p-0">
+      <%- include("aside.ejs") %>
     </div>
+    <div class="col-10">
+        <div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm rounded">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Update User</h4>
+        </div>
+        <div class="card-body">
+          <form action="/updateUser?id=<%= std.id %>" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" id="name" name="name" value="<%= std.name || '' %>" class="form-control" placeholder="Enter updated name" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" id="email" name="email" value="<%= std.email || '' %>" class="form-control" placeholder="Enter updated email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" name="password" value="<%= std.password || '' %>" class="form-control" placeholder="Enter password" required>
+            </div>
+
+            <div class="mb-4">
+              <label for="role" class="form-label">Role</label>
+              <select name="role" id="role" class="form-select" required>
+                <option value="">Select Role</option>
+                <option value="member" <%= std.role === 'member' ? 'selected' : '' %>>Member</option>
+                <!-- Add more roles if needed -->
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    </div>
+</div>
+</div>
 </body>
 </html>
