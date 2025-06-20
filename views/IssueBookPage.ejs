@@ -30,13 +30,13 @@
                                 <input type="hidden" name="user_id" id="user_id" required>
                                 <div id="userSuggestions" class="list-group"></div>
                             </div>
+
                             <div class="mb-3">
                                 <label for="categorySearch" class="form-label">Search category</label>
                                 <input type="text" class="form-control" id="categorySearch" autocomplete="off" required>
                                 <input type="hidden" name="book_id" id="book_id" required>
                                 <div id="categorySuggestions" class="list-group"></div>
                             </div>
-
 
                             <div class="mb-3">
                                 <label for="issue_date" class="form-label">Issue Date</label>
@@ -60,7 +60,6 @@
                         </form>
                     </div>
                 </div>
-
 
 </div>
 
@@ -88,7 +87,7 @@
                         item.className = 'list-group-item list-group-item-action';
                         item.textContent = user.name + ' (' + user.email + ')';
                         item.onclick = () => {
-                            userSearch.value = user.name + ' (' + user.email + ')';
+                            userSearch.value = user.name + ' (' + user.email + ')'+'(' + user.id + ')';
                             userIdInput.value = user.id;
                             userSuggestions.innerHTML = '';
                         };
@@ -116,7 +115,6 @@
                             item.type = 'button';
                             item.className = 'list-group-item list-group-item-action';
                             item.textContent = category.title + ' (' + category.isbn + ')';
- 
                             item.onclick = () => {
                                 categorySearch.value = category.title + ' (' + category.isbn + ')';;
                                 categoryIdInput.value = category.id;

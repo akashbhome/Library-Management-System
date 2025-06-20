@@ -25,19 +25,25 @@
         <div class="col-md-10 w-100">
           <label for="name" class="form-label"> Name</label>
           <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" required >
+          <div id="nameError" style="color: red; font-size: 0.9em;"></div>
         </div>
+
         <div class="col-md-10 w-100">
           <label for="phone" class="form-label">Contact</label>
           <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter Phone Number " required >
+        <div id="phoneError" style="color: red; font-size: 0.9em;"></div>
         </div>
+
         <div class="col-md-10  w-100">
           <label for="email" class="form-label">Email</label>
-           <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
+          <div id="emailError" style="color: red; font-size: 0.9em;"></div>
         </div>
 
         <div class="col-md-10  w-100">
           <label for="password" class="form-label">Password</label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Password" required >
+          <div id="passwordError" style="color: red; font-size: 0.9em;"></div>
         </div>
 
         <div class="col-md-10  w-100">
@@ -49,7 +55,7 @@
         </div>
 
         <div class="col-12 text-center mt-4">
-          <button type="submit" class="btn btn-primary px-5">Submit</button>
+          <button type="submit" class="btn btn-primary px-5" disabled>Submit</button>
         </div>
 
         <% if (msg) { %>
@@ -67,5 +73,52 @@
 
         </div>
 </div>
+
+<script>
+  const nameInput = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const submitBtn = document.getElementById('submitBtn');
+
+  const nameError = document.getElementById('nameError');
+  const phoneError = document.getElementById('phoneError');
+  const emailError = document.getElementById('emailError');
+  const passError = document.getElementById('passwordError');
+
+  const patterns = {
+    name: /^[A-Za-z\s]{2,50}$/,
+    phone: /^\d{10,12}$/,
+    password: /^.{6,}$/
+  };
+
+  function validateField(value, pattern) {
+    return pattern.test(value.trim());
+  }
+
+  function validateForm() {
+    const isNameValid = validateField(nameInput.value, patterns.name);
+    const isPhoneValid = validateField(phoneInput.value, patterns.phone);
+    const isPasswordValid = validateField(passwordInput.value, patterns.passordword);
+    const isEmailValid = emailInput.value.trim() !== ""; // Basic required, HTML5 validates format
+
+    // Name error
+    nameError.textContent = isNameValid ? "" : "Name must be 2–50 letters/spaces only.";
+    // Phone error
+    phoneError.textContent = isPhoneValid ? "" : "Phone must be 10 digits.";
+    // Password error
+    passError.textContent = isPasswordValid ? "" : "Password must be at least 6 characters long.";
+    // Email error
+    emailError.textContent = isEmailValid ? "" : "Please enter a valid email address.";
+    
+    // Enable/disable the submit button
+    submitBtn.disabled = !(isNameValid && isPhoneValid && isEmailValid && isPasswordValid);
+  }
+
+  [nameInput, phoneInput, emailInput, passwordInput].forEach(input => {
+    input.addEventListener('input', validateForm);
+  });
+</script>
+
 </body>
 </html>

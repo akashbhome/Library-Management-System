@@ -253,11 +253,12 @@ exports.searchbook = (category) => {
 exports.issueBook=(user_id,book_id,issue_date,return_date,status)=>{
     return new Promise((resolve, reject) => {
           
-             conn.query("insert into issue_details values ('0',?,?,?,?,?)",[book_id,user_id,issue_date,return_date,status],(err,result)=>{  
+             conn.query("insert into issue_details values('0',?,?,?,?,?)",[book_id,user_id,issue_date,return_date,status],(err,result)=>{  
                 if (err) {
                 return reject(err);
                 }
                 else{
+
                     resolve(result);
                 }
             });

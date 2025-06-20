@@ -343,6 +343,11 @@ exports.searchbook = async (req, res) => {
 
 exports.issueBook=(req,res)=>{
         let{user_id,book_id,issue_date,return_date,status}=req.body;
+        console.log("User ID:", user_id);
+console.log("Book ID:", book_id);
+console.log("Issue Date:", issue_date);
+console.log("Return Date:", return_date);
+console.log("Status:", status);
         let result=adminModel.issueBook(user_id,book_id,issue_date,return_date,status);      
         result.then((r)=>{
                 if(r.length>0)

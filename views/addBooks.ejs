@@ -96,6 +96,23 @@
 </div>
 </div>
 
+<script>
+  const totalInput = document.getElementById('total_copies');
+  const availableInput = document.getElementById('available_copies');
+  const errorDiv = document.createElement('div');
+  errorDiv.id = 'error';
+  errorDiv.style.color = 'red';
+  availableInput.insertAdjacentElement('afterend', errorDiv);
 
+  availableInput.addEventListener('input', function (event) {
+    const total = parseInt(totalInput.value);
+    const available = parseInt(availableInput.value);
+    errorDiv.textContent = '';
+
+    if (!isNaN(total) && !isNaN(available) && available > total) {
+      errorDiv.textContent = 'Available copies cannot be more than total copies.';
+    }
+  });
+</script>
 </body>
 </html>

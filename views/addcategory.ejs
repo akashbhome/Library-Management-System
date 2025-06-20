@@ -21,7 +21,9 @@
     <form action="/catdataAdd" method="POST">
       <div class="mb-3">
         <label for="name" class="form-label">Category Name</label>
-        <input type="text" id="name" name="catname" class="form-control" placeholder="Enter Category Name" required>
+        <input type="text" id="name" name="catname" class="form-control" placeholder="Enter Category Name" required
+        pattern="^[A-Za-z\s]{4,50}$" title="Only letters and spaces, 2-50 characters">
+        <div id="error" style="color: red; font-size: 0.9em;"></div>
       </div>
 
       <div class="text-center">
@@ -37,5 +39,23 @@
 
         </div>
 </div>
+
+<script>
+    const form = document.getElementById('categoryForm');
+    const nameInput = document.getElementById('name');
+    const errorDiv = document.getElementById('error');
+
+    form.addEventListener('submit', function(event) {
+      const value = nameInput.value.trim();
+      const validPattern = /^[A-Za-z\s]{2,50}$/;
+
+      errorDiv.textContent = ""; // Clear any previous error
+      if (!validPattern.test(value)) {
+        errorDiv.textContent = "Category name must be 2–50 letters/spaces only.";
+        event.preventDefault();
+      }
+    });
+  </script>
+
 </body>
 </html>
